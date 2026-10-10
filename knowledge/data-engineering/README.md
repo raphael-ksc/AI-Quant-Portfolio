@@ -16,4 +16,4 @@
 
 ## 筆記
 
-（每個知識點一個 `.md`，例如 `purged-kfold.md`）
+- [Moomoo vs yfinance 資料覆蓋度實測](moomoo-vs-yfinance.md)：財報期數比較、Moomoo 期末日偏移 1 天

@@ -1,0 +1,12 @@
+# Python 3.13（.venv）
+# 資料來源
+moomoo-api==10.11.7108
+yfinance==1.7.0
+# 資料處理
+pandas==3.0.6
+pyyaml==6.0.3
+# 資料庫
+pymysql==2.2.8
+python-dotenv
+# 測試
+pytest==9.1.1
