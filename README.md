@@ -2,6 +2,8 @@
 
 系統化記錄「AI 量化交易」課程的 24 項實作打卡：從多資料源數據工程、基本面與技術面研究、回測，到系統化策略、機器學習因子與 AI Agent 自動化。
 
+🌐 **網站**：https://raphael-ksc.github.io/AI-Quant-Portfolio/ （繁體中文／English，三種主題）
+
 > ⚠️ **免責聲明**：本 repo 所有策略分析、回測結果與訊號探討僅供教育與研究用途，不構成投資建議或收益保證。
 
 ## 技術環境
@@ -32,7 +34,7 @@ lessons/      按課程：Lxx-<課程>/Cxx-<打卡題>/（checkin.md、src/、no
 knowledge/    按知識點分類的概念筆記
 quantlib/     跨課共用程式庫（資料、特徵、回測、策略、ML、風控）
 scripts/      建置腳本（掃描 checkin.md 產生展示頁資料）
-site/         展示網站（GitHub Pages）
+site/         展示網站（Next.js 靜態匯出 → GitHub Pages）
 tests/        單元測試
 ```
 
@@ -41,3 +43,14 @@ tests/        單元測試
 ## 每題成果的固定結構
 
 問題定義 → 方法 → 結果（圖表與指標）→ 風險檢查表（資料洩漏、倖存者偏差、過度擬合、交易成本、流動性）→ 限制與心得
+
+## 本機開發
+
+```
+# 1. 驗證打卡資料並產生網站資料
+.venv\Scripts\python.exe scripts\build_manifest.py
+# 2. 啟動網站（http://localhost:3000/AI-Quant-Portfolio/）
+cd site && npm install && npm run dev
+# 3. 測試
+.venv\Scripts\python.exe -m pytest tests
+```
