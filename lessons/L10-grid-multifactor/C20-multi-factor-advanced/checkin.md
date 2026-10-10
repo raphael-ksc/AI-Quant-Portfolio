@@ -2,11 +2,15 @@
 id: C20
 lesson: L10
 title: 多因子選股（進階）
+title_en: Multi-factor Stock Selection (Advanced)
 category: fundamentals
 knowledge: [fundamentals, backtesting, risk-management]
 tags: [多因子, IC, 月度調倉, Top-N]
 symbols: []
 status: todo
+phase: 6
+order: 20
+flagship: false
 date:
 confidence:
 source: 10-网格与多因子/10-网格与多因子.pdf p.67

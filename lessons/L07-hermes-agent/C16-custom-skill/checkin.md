@@ -2,11 +2,15 @@
 id: C16
 lesson: L07
 title: 自己編寫一個 SKILL
+title_en: Writing a Custom Skill
 category: ai-agents
 knowledge: [ai-agents]
 tags: [Hermes, Skill, 複合技能]
 symbols: []
 status: todo
+phase: 5
+order: 15
+flagship: false
 date:
 confidence:
 source: 7-Hermes：搭建你的量化交易同事/7-Hermes：搭建你的量化交易同事.pdf p.87

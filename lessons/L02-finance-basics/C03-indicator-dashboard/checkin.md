@@ -2,11 +2,15 @@
 id: C03
 lesson: L02
 title: 你的自選股儀表盤
+title_en: Watchlist Indicator Dashboard
 category: technical-analysis
 knowledge: [technical-analysis]
 tags: [MA, RSI, ATR, 成交量]
 symbols: []
 status: todo
+phase: 6
+order: 18
+flagship: false
 date:
 confidence:
 source: 2-金融基础速通/2-金融基础速通.pdf p.79

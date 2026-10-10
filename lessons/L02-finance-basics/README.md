@@ -1,3 +1,9 @@
+---
+id: L02
+title: 金融基礎速通
+title_en: Finance Fundamentals Crash Course
+---
+
 # L02 金融基礎速通
 
 ## 打卡

@@ -1,3 +1,9 @@
+---
+id: L11
+title: 機器學習因子挖掘
+title_en: Machine Learning Factor Mining
+---
+
 # L11 機器學習因子挖掘
 
 ## 打卡

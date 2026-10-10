@@ -2,11 +2,15 @@
 id: C01
 lesson: L01
 title: 貴州茅台的 2025 年交易策略
+title_en: Kweichow Moutai 2025 Trading Strategy
 category: backtesting
 knowledge: [backtesting, technical-analysis]
 tags: [MACD, 雙均線, 網格]
 symbols: []
 status: todo
+phase: 6
+order: 16
+flagship: false
 date:
 confidence:
 source: 1-量化世界的生存法则/1-量化世界的生存法则.pdf p.67

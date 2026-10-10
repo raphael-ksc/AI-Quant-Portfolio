@@ -1,3 +1,11 @@
+---
+id: ai-agents
+title: AI Agent 自動化
+title_en: AI Agents
+description: LLM Agent、Skill 設計、研究流程自動編排。
+description_en: LLM agents, skill design and automated research workflows.
+---
+
 # AI Agent 自動化（AI Agents）
 
 LLM Agent、Skill 設計、研究流程自動編排。

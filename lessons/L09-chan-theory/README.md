@@ -1,3 +1,9 @@
+---
+id: L09
+title: 纏論精華量化
+title_en: Quantifying Chan Theory
+---
+
 # L09 纏論精華量化
 
 ## 打卡

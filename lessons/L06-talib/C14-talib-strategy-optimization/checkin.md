@@ -2,11 +2,15 @@
 id: C14
 lesson: L06
 title: 制定你的股票 2025 年交易策略
+title_en: Optimising a 2025 Stock Strategy with TA-Lib
 category: technical-analysis
 knowledge: [technical-analysis, backtesting]
 tags: [TA-Lib, RSI, MACD, 布林帶, 自適應]
 symbols: []
 status: todo
+phase: 3
+order: 9
+flagship: false
 date:
 confidence:
 source: 6-装备Talib技术指标库/6-装备Talib技术指标库.pdf p.58

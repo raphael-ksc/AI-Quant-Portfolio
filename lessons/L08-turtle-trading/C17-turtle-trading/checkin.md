@@ -2,11 +2,15 @@
 id: C17
 lesson: L08
 title: 海龜交易策略
+title_en: Turtle Trading Strategy
 category: strategies
 knowledge: [strategies, machine-learning, backtesting]
 tags: [海龜, ADX, ML 增強]
 symbols: []
 status: todo
+phase: 3
+order: 7
+flagship: true
 date:
 confidence:
 source: 8-海龟交易法则/8-海龟交易法则.pdf p.64

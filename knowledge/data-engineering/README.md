@@ -1,3 +1,11 @@
+---
+id: data-engineering
+title: 數據工程
+title_en: Data Engineering
+description: 行情／財務／宏觀／新聞／LLM 多資料源採集、資料庫設計、資料品質與時區幣別處理。
+description_en: Multi-source collection of market, financial, macro, news and LLM-derived data; database design; data quality, time zones and currencies.
+---
+
 # 數據工程（Data Engineering）
 
 行情／財務／宏觀／新聞／LLM 多資料源採集、資料庫設計、資料品質與時區幣別處理。

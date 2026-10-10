@@ -1,3 +1,9 @@
+---
+id: L04
+title: 數據獲取與清洗
+title_en: Data Acquisition and Cleaning
+---
+
 # L04 數據獲取與清洗
 
 ## 打卡

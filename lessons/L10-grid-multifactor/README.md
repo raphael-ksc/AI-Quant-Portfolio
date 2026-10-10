@@ -1,3 +1,9 @@
+---
+id: L10
+title: 網格與多因子
+title_en: Grid Trading and Multi-factor Models
+---
+
 # L10 網格與多因子
 
 ## 打卡

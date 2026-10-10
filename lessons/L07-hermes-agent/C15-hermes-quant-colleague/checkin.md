@@ -2,11 +2,15 @@
 id: C15
 lesson: L07
 title: 打造你的量化交易同事
+title_en: Building a Quant Trading Colleague
 category: ai-agents
 knowledge: [ai-agents]
 tags: [Hermes, LLM, Skill]
 symbols: []
 status: todo
+phase: 5
+order: 14
+flagship: false
 date:
 confidence:
 source: 7-Hermes：搭建你的量化交易同事/7-Hermes：搭建你的量化交易同事.pdf p.73

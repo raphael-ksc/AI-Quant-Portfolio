@@ -2,11 +2,15 @@
 id: C13
 lesson: L05
 title: 搭建你的股票交易回測
+title_en: Building a Stock Backtest
 category: backtesting
 knowledge: [backtesting, technical-analysis, risk-management]
 tags: [Backtrader, 雙均線, MACD, RSI, 布林帶, 動量]
 symbols: []
 status: todo
+phase: 1
+order: 3
+flagship: true
 date:
 confidence:
 source: 5-掌握回测引擎 Backtrader/5-掌握回测引擎Backtrader.pdf p.61

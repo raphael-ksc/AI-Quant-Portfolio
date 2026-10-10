@@ -1,3 +1,9 @@
+---
+id: L01
+title: 量化世界的生存法則
+title_en: Survival Rules of the Quant World
+---
+
 # L01 量化世界的生存法則
 
 ## 打卡

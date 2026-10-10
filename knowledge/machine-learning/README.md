@@ -1,3 +1,11 @@
+---
+id: machine-learning
+title: 機器學習因子
+title_en: ML Alpha
+description: 特徵工程、RankIC／ICIR、XGBoost／LightGBM、Purged K-Fold、Walk-Forward、截面預測。
+description_en: Feature engineering, RankIC / ICIR, XGBoost / LightGBM, purged K-fold, walk-forward and cross-sectional prediction.
+---
+
 # 機器學習因子（ML Alpha）
 
 特徵工程、RankIC／ICIR、XGBoost／LightGBM、Purged K-Fold、Walk-Forward、截面預測。

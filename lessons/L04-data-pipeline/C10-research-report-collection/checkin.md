@@ -2,11 +2,15 @@
 id: C10
 lesson: L04
 title: 研報數據採集
+title_en: Analyst Research Collection
 category: data-engineering
 knowledge: [data-engineering]
 tags: [研報, 一致預期, MySQL]
 symbols: []
 status: todo
+phase: 6
+order: 24
+flagship: false
 date:
 confidence:
 source: 4-数据获取与清洗/4-数据获取与清洗.pdf p.79

@@ -1,3 +1,9 @@
+---
+id: L06
+title: 裝備 TA-Lib 技術指標庫
+title_en: The TA-Lib Indicator Library
+---
+
 # L06 裝備 TA-Lib 技術指標庫
 
 ## 打卡

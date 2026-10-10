@@ -1,3 +1,9 @@
+---
+id: L07
+title: Hermes：搭建你的量化交易同事
+title_en: 'Hermes: Building a Quant Trading Colleague'
+---
+
 # L07 Hermes：搭建你的量化交易同事
 
 ## 打卡

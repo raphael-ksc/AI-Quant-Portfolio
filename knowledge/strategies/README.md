@@ -1,3 +1,11 @@
+---
+id: strategies
+title: 系統化交易策略
+title_en: Systematic Strategies
+description: 海龜、纏論、網格、策略融合與市場狀態判斷。
+description_en: Turtle, Chan theory, grid trading, strategy fusion and market regime detection.
+---
+
 # 系統化交易策略（Systematic Strategies）
 
 海龜、纏論、網格、策略融合與市場狀態判斷。

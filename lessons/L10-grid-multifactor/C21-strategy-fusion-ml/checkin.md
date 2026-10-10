@@ -2,11 +2,15 @@
 id: C21
 lesson: L10
 title: 策略融合與 ML 增強
+title_en: Strategy Fusion and ML Enhancement
 category: strategies
 knowledge: [strategies, machine-learning]
 tags: [LightGBM, Walk-Forward, 特徵重要性]
 symbols: []
 status: todo
+phase: 3
+order: 10
+flagship: true
 date:
 confidence:
 source: 10-网格与多因子/10-网格与多因子.pdf p.95

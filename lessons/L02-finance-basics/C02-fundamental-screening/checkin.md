@@ -2,11 +2,15 @@
 id: C02
 lesson: L02
 title: 制定你的基本面選股
+title_en: Building a Fundamental Stock Screen
 category: fundamentals
 knowledge: [fundamentals]
 tags: [ROE, 負債率, Moomoo]
 symbols: []
 status: todo
+phase: 6
+order: 17
+flagship: false
 date:
 confidence:
 source: 2-金融基础速通/2-金融基础速通.pdf p.53

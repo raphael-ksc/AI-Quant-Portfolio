@@ -2,11 +2,15 @@
 id: C05
 lesson: L03
 title: 多因子選股
+title_en: Multi-factor Stock Selection
 category: fundamentals
 knowledge: [fundamentals, data-engineering]
 tags: [多因子, 選股, Moomoo]
 symbols: []
 status: wip
+phase: 6
+order: 19
+flagship: false
 date:
 confidence:
 source: 3-打造数字化办公室/3-基础设施打造（构建数字化办公室）.pdf p.116

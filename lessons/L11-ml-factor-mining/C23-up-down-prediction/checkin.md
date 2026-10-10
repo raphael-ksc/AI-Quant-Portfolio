@@ -2,11 +2,15 @@
 id: C23
 lesson: L11
 title: 股票漲跌預測
+title_en: Next-day Direction Prediction
 category: machine-learning
 knowledge: [machine-learning, risk-management]
 tags: [XGBoost, LightGBM, Purged K-Fold]
 symbols: []
 status: todo
+phase: 4
+order: 12
+flagship: false
 date:
 confidence:
 source: 11-机器学习因子挖掘/11-机器学习因子挖掘.pdf p.91

@@ -2,11 +2,15 @@
 id: C18
 lesson: L09
 title: 纏論交易策略
+title_en: Chan Theory Trading Strategy
 category: strategies
 knowledge: [strategies, machine-learning, backtesting]
 tags: [纏論, chan.py, 多週期, Backtrader]
 symbols: []
 status: todo
+phase: 6
+order: 22
+flagship: false
 date:
 confidence:
 source: 9-缠论精华量化/9-缠论量化.pdf p.84

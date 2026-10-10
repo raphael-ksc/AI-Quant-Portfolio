@@ -1,3 +1,9 @@
+---
+id: L03
+title: 打造數字化辦公室
+title_en: Building a Digital Office
+---
+
 # L03 打造數字化辦公室
 
 ## 打卡

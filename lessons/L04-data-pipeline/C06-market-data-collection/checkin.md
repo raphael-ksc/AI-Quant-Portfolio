@@ -2,11 +2,15 @@
 id: C06
 lesson: L04
 title: 行情數據採集
+title_en: Market Data Collection
 category: data-engineering
 knowledge: [data-engineering]
 tags: [Moomoo, MySQL, 日線]
 symbols: []
 status: todo
+phase: 1
+order: 2
+flagship: false
 date:
 confidence:
 source: 4-数据获取与清洗/4-数据获取与清洗.pdf p.43

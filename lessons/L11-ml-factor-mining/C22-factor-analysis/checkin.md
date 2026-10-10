@@ -2,11 +2,15 @@
 id: C22
 lesson: L11
 title: 自選股因子分析
+title_en: Watchlist Factor Analysis
 category: machine-learning
 knowledge: [machine-learning, fundamentals]
 tags: [RankIC, Spearman, 因子分析]
 symbols: []
 status: todo
+phase: 4
+order: 11
+flagship: false
 date:
 confidence:
 source: 11-机器学习因子挖掘/11-机器学习因子挖掘.pdf p.32

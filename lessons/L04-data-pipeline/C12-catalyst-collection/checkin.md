@@ -2,11 +2,15 @@
 id: C12
 lesson: L04
 title: 關鍵催化劑採集
+title_en: Key Catalyst Extraction with LLMs
 category: data-engineering
 knowledge: [data-engineering, ai-agents]
 tags: [LLM, 催化劑, MySQL]
 symbols: []
 status: todo
+phase: 5
+order: 13
+flagship: false
 date:
 confidence:
 source: 4-数据获取与清洗/4-数据获取与清洗.pdf p.97

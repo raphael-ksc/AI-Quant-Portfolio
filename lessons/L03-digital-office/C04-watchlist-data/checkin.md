@@ -2,11 +2,15 @@
 id: C04
 lesson: L03
 title: 獲取你的自選股數據
+title_en: Watchlist Data Acquisition
 category: data-engineering
 knowledge: [data-engineering]
 tags: [Moomoo, yfinance, 日線, 分鐘線, 財務數據]
 symbols: []
 status: wip
+phase: 1
+order: 1
+flagship: false
 date:
 confidence:
 source: 3-打造数字化办公室/3-基础设施打造（构建数字化办公室）.pdf p.81

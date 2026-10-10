@@ -2,11 +2,15 @@
 id: C11
 lesson: L04
 title: 財經日曆採集
+title_en: Economic Calendar Collection
 category: data-engineering
 knowledge: [data-engineering]
 tags: [財經日曆, MySQL]
 symbols: []
 status: todo
+phase: 2
+order: 6
+flagship: true
 date:
 confidence:
 source: 4-数据获取与清洗/4-数据获取与清洗.pdf p.86

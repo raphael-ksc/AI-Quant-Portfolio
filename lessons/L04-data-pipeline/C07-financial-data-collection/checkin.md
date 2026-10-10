@@ -2,11 +2,15 @@
 id: C07
 lesson: L04
 title: 財務數據採集
+title_en: Financial Statement Data Collection
 category: data-engineering
 knowledge: [data-engineering, fundamentals]
 tags: [Moomoo, MySQL, 財務數據]
 symbols: []
 status: todo
+phase: 1
+order: 4
+flagship: false
 date:
 confidence:
 source: 4-数据获取与清洗/4-数据获取与清洗.pdf p.54

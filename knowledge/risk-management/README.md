@@ -1,3 +1,11 @@
+---
+id: risk-management
+title: 風險管理與回測偏差
+title_en: Risk & Bias
+description: 資料洩漏、前視偏差、倖存者偏差、過度擬合、流動性與市場衝擊。
+description_en: Data leakage, look-ahead bias, survivorship bias, overfitting, liquidity and market impact.
+---
+
 # 風險管理與回測偏差（Risk & Bias）
 
 資料洩漏、前視偏差、倖存者偏差、過度擬合、流動性與市場衝擊。

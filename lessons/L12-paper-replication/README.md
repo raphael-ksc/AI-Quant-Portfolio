@@ -1,3 +1,9 @@
+---
+id: L12
+title: 論文復現與策略進化
+title_en: Paper Replication and Strategy Evolution
+---
+
 # L12 論文復現與策略進化
 
 ## 打卡

@@ -1,3 +1,9 @@
+---
+id: L08
+title: 海龜交易法則
+title_en: The Turtle Trading Rules
+---
+
 # L08 海龜交易法則
 
 ## 打卡

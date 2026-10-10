@@ -29,3 +29,7 @@ venv/
 Thumbs.db
 .vscode/
 .idea/
+
+# 建置產物（CI 會重新產生）
+site/data/
+.pytest_cache/

@@ -1,3 +1,11 @@
+---
+id: fundamentals
+title: 基本面研究
+title_en: Fundamental Research
+description: 財務科目處理、ROE／負債率／FCF 等指標、多因子打分與選股池。
+description_en: Financial statement items, ROE / leverage / FCF metrics, multi-factor scoring and stock universes.
+---
+
 # 基本面研究（Fundamental Research）
 
 財務科目處理、ROE／負債率／FCF 等指標、多因子打分與選股池。

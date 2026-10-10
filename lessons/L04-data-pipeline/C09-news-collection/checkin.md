@@ -2,11 +2,15 @@
 id: C09
 lesson: L04
 title: 新聞事件採集
+title_en: News Event Collection
 category: data-engineering
 knowledge: [data-engineering]
 tags: [新聞, MySQL]
 symbols: []
 status: todo
+phase: 6
+order: 23
+flagship: false
 date:
 confidence:
 source: 4-数据获取与清洗/4-数据获取与清洗.pdf p.70

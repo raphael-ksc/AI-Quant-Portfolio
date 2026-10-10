@@ -2,11 +2,15 @@
 id: C08
 lesson: L04
 title: 宏觀經濟數據採集
+title_en: Macroeconomic Data Collection
 category: data-engineering
 knowledge: [data-engineering]
 tags: [宏觀, MySQL]
 symbols: []
 status: todo
+phase: 2
+order: 5
+flagship: true
 date:
 confidence:
 source: 4-数据获取与清洗/4-数据获取与清洗.pdf p.63

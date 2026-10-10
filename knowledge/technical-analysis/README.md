@@ -1,3 +1,11 @@
+---
+id: technical-analysis
+title: 技術分析
+title_en: Technical Analysis
+description: 趨勢／震盪／能量／波動四類指標、TA-Lib、K 線形態。
+description_en: Trend, oscillator, volume and volatility indicators; TA-Lib; candlestick patterns.
+---
+
 # 技術分析（Technical Analysis）
 
 趨勢／震盪／能量／波動四類指標、TA-Lib、K 線形態。

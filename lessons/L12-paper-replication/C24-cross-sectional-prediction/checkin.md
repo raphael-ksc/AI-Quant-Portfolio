@@ -2,11 +2,15 @@
 id: C24
 lesson: L12
 title: 股票截面預測
+title_en: Cross-sectional Return Prediction
 category: machine-learning
 knowledge: [machine-learning, risk-management]
 tags: [XGBoost, IC/ICIR, 截面預測, MASTER]
 symbols: []
 status: todo
+phase: 6
+order: 21
+flagship: false
 date:
 confidence:
 source: 12-论文复现与策略进化/12-论文复现与策略进化.pdf p.94

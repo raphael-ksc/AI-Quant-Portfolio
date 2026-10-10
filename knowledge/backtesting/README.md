@@ -1,3 +1,11 @@
+---
+id: backtesting
+title: 回測
+title_en: Backtesting
+description: Backtrader 引擎、交易成本與滑價、績效指標、策略比較方法。
+description_en: The Backtrader engine, transaction costs and slippage, performance metrics and strategy comparison.
+---
+
 # 回測（Backtesting）
 
 Backtrader 引擎、交易成本與滑價、績效指標、策略比較方法。

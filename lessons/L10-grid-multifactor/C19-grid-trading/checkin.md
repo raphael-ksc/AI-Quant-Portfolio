@@ -2,11 +2,15 @@
 id: C19
 lesson: L10
 title: 網格交易策略
+title_en: Grid Trading Strategy
 category: strategies
 knowledge: [strategies, backtesting]
 tags: [網格, 中樞, chan.py, ADX]
 symbols: []
 status: todo
+phase: 3
+order: 8
+flagship: false
 date:
 confidence:
 source: 10-网格与多因子/10-网格与多因子.pdf p.38
