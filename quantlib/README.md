@@ -9,4 +9,5 @@
 - `ml/`：時間序列交叉驗證（Purged K-Fold、Walk-Forward）、模型訓練
 - `risk/`：部位控管、停損、風險指標
 
-> 尚未實作：程式碼依審批流程逐步加入。現有 `homework_multi_source/loaders/` 待搬遷至 `data/` 與 `features/`。
+> `data/` 已完成（C04，2026-10-10）：Moomoo / yfinance 統一介面、schema 驗證、期末日修正、分頁與頻率限制處理，測試見 `tests/test_data_layer.py`。
+> 其他子目錄依審批流程逐步加入；第一版的 `factor_engine.py`、`screener.py` 留在 `lessons/L03-digital-office/legacy-homework/loaders/`，C05 時改寫進 `features/`。

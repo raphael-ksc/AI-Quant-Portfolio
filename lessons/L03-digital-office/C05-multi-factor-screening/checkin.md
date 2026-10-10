@@ -29,7 +29,7 @@ outputs:
   - 數據可用課程提供的，或自行下載
   - 你是如何定義「好公司」的？
   - 多因子選股的分數制定
-- 目前進度：`homework_multi_source/webapp` 的 `/screener` 已能依板塊抓市值前 30 大成分股、計算 ROE(TTM) 與 Capex 比率。
+- 目前進度：第一版作業 `lessons/L03-digital-office/legacy-homework/webapp` 的 `/screener` 已能依板塊抓市值前 30 大成分股、計算 ROE(TTM) 與 Capex 比率。
 - 待補：擴大股票池規模、明確的多因子打分公式與權重說明。
 
 ## 方法

@@ -1,0 +1,27 @@
+# 自選股設定：同一標的在各資料源的代碼、幣別與交易所時區
+# 串接前先查證實際掛牌交易所，不可用公司國籍推測（例：IREN 總部在澳洲，但只在 Nasdaq 掛牌）
+symbols:
+  PLTR:
+    name_en: Palantir Technologies
+    name_zh: Palantir 科技
+    exchange: NASDAQ
+    currency: USD
+    timezone: America/New_York
+    moomoo: US.PLTR
+    yfinance: PLTR
+  IREN:
+    name_en: IREN Limited
+    name_zh: IREN Limited
+    exchange: NASDAQ
+    currency: USD
+    timezone: America/New_York
+    moomoo: US.IREN
+    yfinance: IREN
+  NVDA:
+    name_en: NVIDIA
+    name_zh: 輝達
+    exchange: NASDAQ
+    currency: USD
+    timezone: America/New_York
+    moomoo: US.NVDA
+    yfinance: NVDA

@@ -1,0 +1,130 @@
+{
+  "generated_on": "2026-10-10",
+  "source": "moomoo",
+  "versions": {
+    "moomoo-api": "10.11.7108",
+    "yfinance": "1.7.0",
+    "pandas": "3.0.6"
+  },
+  "params": {
+    "daily": [
+      "2024-01-01",
+      "2025-12-31"
+    ],
+    "minute_day": "2026-02-06",
+    "session": "regular (09:30-16:00 ET)",
+    "adjust": "qfq (forward-adjusted)",
+    "financial_periods": 8
+  },
+  "symbols": {
+    "PLTR": {
+      "name_en": "Palantir Technologies",
+      "exchange": "NASDAQ",
+      "currency": "USD",
+      "daily": {
+        "rows": 502,
+        "first": "2024-01-02 00:00:00",
+        "last": "2025-12-31 00:00:00"
+      },
+      "minute": {
+        "rows": 390,
+        "first": "2026-02-06 09:31:00-05:00",
+        "last": "2026-02-06 16:00:00-05:00"
+      },
+      "financials": {
+        "freq": "Q",
+        "currency": "USD",
+        "periods": [
+          "2026-06-30",
+          "2026-03-31",
+          "2025-12-31",
+          "2025-09-30",
+          "2025-06-30",
+          "2025-03-31",
+          "2024-12-31",
+          "2024-09-30"
+        ],
+        "fiscal_periods": [
+          "2026/Q2",
+          "2026/Q1",
+          "2025/Q4",
+          "2025/Q3",
+          "2025/Q2",
+          "2025/Q1",
+          "2024/Q4",
+          "2024/Q3"
+        ],
+        "items_by_statement": {
+          "balance": 36,
+          "cashflow": 26,
+          "income": 23
+        },
+        "announce_date_available": false
+      },
+      "cross_check_vs_yfinance": {
+        "matched_days": 502,
+        "only_in_primary": 0,
+        "only_in_yfinance": 0,
+        "max_abs_close_diff_pct": 0.0,
+        "mean_abs_close_diff_pct": 0.0
+      }
+    },
+    "IREN": {
+      "name_en": "IREN Limited",
+      "exchange": "NASDAQ",
+      "currency": "USD",
+      "daily": {
+        "rows": 502,
+        "first": "2024-01-02 00:00:00",
+        "last": "2025-12-31 00:00:00"
+      },
+      "minute": {
+        "rows": 390,
+        "first": "2026-02-06 09:31:00-05:00",
+        "last": "2026-02-06 16:00:00-05:00"
+      },
+      "financials": {
+        "freq": "Q",
+        "currency": "USD",
+        "periods": [
+          "2026-06-30",
+          "2026-03-31",
+          "2025-12-31",
+          "2025-09-30",
+          "2025-06-30",
+          "2025-03-31",
+          "2024-12-31",
+          "2024-09-30"
+        ],
+        "fiscal_periods": [
+          "2026/Q4",
+          "2026/Q3",
+          "2026/Q2",
+          "2026/Q1",
+          "2025/Q4",
+          "2025/Q3",
+          "2025/Q2",
+          "2025/Q1"
+        ],
+        "items_by_statement": {
+          "balance": 52,
+          "cashflow": 30,
+          "income": 32
+        },
+        "announce_date_available": false
+      },
+      "cross_check_vs_yfinance": {
+        "matched_days": 502,
+        "only_in_primary": 0,
+        "only_in_yfinance": 0,
+        "max_abs_close_diff_pct": 0.0,
+        "mean_abs_close_diff_pct": 0.0
+      }
+    }
+  },
+  "history_kline_quota": {
+    "used": 2,
+    "remaining": 98
+  },
+  "notes": []
+}
