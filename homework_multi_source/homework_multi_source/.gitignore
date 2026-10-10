@@ -1,0 +1,19 @@
+# 環境與敏感資訊（絕對不要提交到 GitHub）
+.env
+*.xml
+FutuOpenD*/
+MoomooOpenD*/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

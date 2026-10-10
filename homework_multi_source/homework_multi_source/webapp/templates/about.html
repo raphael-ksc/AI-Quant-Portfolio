@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About This Project · 架構說明</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<div class="terminal">
+  <header class="topbar">
+    <div class="topbar-title">
+      <span class="topbar-mark">◆</span>
+      <span data-i18n="site_title">量化自選股數據終端</span>
+    </div>
+    <nav class="topbar-nav">
+      <a href="{{ url_for('index') }}" data-i18n="nav_dashboard">回到終端</a>
+      <a href="{{ url_for('screener_page') }}" data-i18n="nav_screener">多因子選股</a>
+      <a href="{{ url_for('notes') }}" data-i18n="nav_notes">學習筆記</a>
+      <button id="langToggle" class="lang-toggle" type="button">EN</button>
+    </nav>
+  </header>
+
+  <div class="about-page">
+
+    <!-- 繁體中文版 -->
+    <article class="lang-zh">
+      <h1>Quant Watchlist Terminal</h1>
+      <p class="about-subtitle">跨資料源股票數據管線 &amp; 多因子選股工具</p>
+
+      <h2>問題背景</h2>
+      <p>
+        我是台灣居民，無法使用中國大陸券商的 QMT／miniQMT，這代表主流的
+        量化交易課程教材、社群範例，有很大一部分直接搬過來是行不通的。
+        這個專案的起點，是把一套「QMT 中心」的資料獲取邏輯，重新設計成
+        一套能在我實際可用的券商（Moomoo）與公開資料源（yfinance）上
+        運作的架構，同時保留原始邏輯裡值得參考的工程紀律
+        （模組化、防呆、風險檢查）。
+      </p>
+
+      <h2>系統架構</h2>
+      <pre class="about-diagram">┌─────────────┐     ┌──────────────┐
+│ Moomoo API  │     │  yfinance    │
+│ (美股)      │     │ (澳股/其他)  │
+└──────┬──────┘     └──────┬───────┘
+       │                   │
+       └─────────┬─────────┘
+                  ▼
+         unify_schema.py
+     （統一格式 + 幣別/來源標註）
+                  │
+       ┌──────────┴──────────┐
+       ▼                     ▼
+  webapp/ 儀表板       factor_engine.py
+  （K線 + 財報展示）    （純計算層：ROE、
+                        Capex 相關比率）
+                            │
+                            ▼
+                       screener.py
+                   （板塊篩選協調層）
+                            │
+                            ▼
+                     screener.html
+                   （多因子選股結果）</pre>
+
+      <h2>關鍵設計決策</h2>
+      <table>
+        <tr><th>決策</th><th>理由</th></tr>
+        <tr>
+          <td>資料源層獨立模組化（moomoo_loader / yfinance_loader）</td>
+          <td>券商與資料源會隨著市場、成本、監管而更換，抓資料邏輯需要能單獨替換，不影響上層的分析與呈現邏輯。</td>
+        </tr>
+        <tr>
+          <td>統一格式層強制標註幣別與資料源</td>
+          <td>跨市場比較最常見的錯誤是把不同幣別的數字直接放在一起看，這一層是防止這類低級錯誤的第一道防線。</td>
+        </tr>
+        <tr>
+          <td>因子計算（factor_engine）與資料抓取（screener）分離</td>
+          <td>因子計算是純函式（給定數據、算出比率），可以獨立寫單元測試、獨立驗證邏輯是否正確，不需要每次都連線券商才能測試。</td>
+        </tr>
+        <tr>
+          <td>用「近4季 vs 前4季」判斷趨勢，而非單季比較</td>
+          <td>資本支出常有明顯的季節性與一次性項目，單季比較容易被雜訊誤導，用季度區間平均值降低雜訊影響。</td>
+        </tr>
+      </table>
+
+      <h2>因子邏輯：為什麼看這三個 Capex 相關比率</h2>
+      <p>
+        這個篩選器要抓的不是「花很多錢做 AI 基礎建設」的公司，而是
+        「花錢做 AI 基礎建設、而且營運現金流已經開始有能力撐起這筆花費」
+        的公司——也就是資本支出循環從「故事」走向「現實」的轉折點：
+      </p>
+      <ul>
+        <li><strong>Capex Intensity</strong>（資本支出 / 營收）：判斷公司是否真的在加碼擴產。</li>
+        <li><strong>OCF Coverage of Capex</strong>（營運現金流 / 資本支出）：判斷這筆擴產花費是否已經被自身賺到的現金覆蓋，而非仰賴融資。這是最核心的「資金流開始 cover」指標。</li>
+        <li><strong>FCF Margin</strong>（(營運現金流 − 資本支出) / 營收）：把前兩者合成一個最終指標，確認公司在擴產同時，是否仍然留得住現金。</li>
+      </ul>
+
+      <h2>已知限制（誠實揭露）</h2>
+      <ul>
+        <li><strong>倖存者偏差</strong>：板塊成分股是「現在」的名單，不包含已經下市或被移出板塊的公司，篩選結果會偏向目前仍存活、表現較好的公司。</li>
+        <li><strong>行情覆蓋範圍</strong>：Moomoo OpenAPI 目前不支援新加坡、日本、澳洲市場的行情數據，架構上必須為特定市場切換資料源。</li>
+        <li><strong>財報週期差異</strong>：非美股標的（如澳股）多為半年報制度，「近8季」的假設在這些市場不成立，需要自動降級為年報並明確標註。</li>
+        <li><strong>財務科目比對用關鍵字比對而非固定欄位 ID</strong>：Moomoo API 的欄位命名可能因版本而異，目前用字串比對辨識科目，屬於已知的脆弱點，未來可考慮改用官方 field_id 對照表加強穩健性。</li>
+      </ul>
+
+      <div class="about-links">
+        <p>原始碼：<a href="#">GitHub Repository（部署後補上連結）</a></p>
+      </div>
+    </article>
+
+    <!-- English (Australian) Version -->
+    <article class="lang-en hidden">
+      <h1>Quant Watchlist Terminal</h1>
+      <p class="about-subtitle">A cross-provider equity data pipeline &amp; multi-factor screener</p>
+
+      <h2>Background</h2>
+      <p>
+        As a Taiwan resident, I don't have access to mainland Chinese
+        brokerage platforms such as QMT/miniQMT, which most mainstream
+        quant trading course materials and community examples are built
+        around. This project started as a re-architecture of a
+        QMT-centric data retrieval workflow into one that runs on a
+        broker I can actually use (Moomoo) and a public data source
+        (yfinance), while keeping the engineering discipline worth
+        carrying over — modularity, defensive design, and explicit risk
+        checks.
+      </p>
+
+      <h2>System architecture</h2>
+      <pre class="about-diagram">┌─────────────┐     ┌──────────────┐
+│ Moomoo API  │     │  yfinance    │
+│ (US equities)     │ (AU equities │
+└──────┬──────┘     │  and others) │
+       │            └──────┬───────┘
+       └─────────┬─────────┘
+                  ▼
+         unify_schema.py
+   (unified schema + currency/source tags)
+                  │
+       ┌──────────┴──────────┐
+       ▼                     ▼
+  webapp dashboard     factor_engine.py
+  (candles + financials) (pure computation:
+                          ROE, capex ratios)
+                            │
+                            ▼
+                       screener.py
+                  (sector screening layer)
+                            │
+                            ▼
+                     screener.html
+                (multi-factor screen results)</pre>
+
+      <h2>Key design decisions</h2>
+      <table>
+        <tr><th>Decision</th><th>Rationale</th></tr>
+        <tr>
+          <td>Independent, swappable data source modules (moomoo_loader / yfinance_loader)</td>
+          <td>Brokers and data providers change with market coverage, cost and regulation, so the retrieval logic needs to be replaceable without touching the analysis or presentation layers above it.</td>
+        </tr>
+        <tr>
+          <td>A unified schema layer that enforces currency and source tagging</td>
+          <td>The most common error in cross-market comparisons is plotting figures in different currencies on the same axis; this layer is the first line of defence against that mistake.</td>
+        </tr>
+        <tr>
+          <td>Factor computation (factor_engine) kept separate from data retrieval (screener)</td>
+          <td>Factor computation is a pure function — given the data, it computes the ratios — which means it can be unit tested and validated independently, without needing a live broker connection for every test.</td>
+        </tr>
+        <tr>
+          <td>Trend judged via "last 4 quarters vs prior 4 quarters" rather than quarter-on-quarter</td>
+          <td>Capex is often seasonal and lumpy; averaging across a rolling window reduces noise compared to a single-quarter comparison.</td>
+        </tr>
+      </table>
+
+      <h2>Factor logic: why these three capex-related ratios</h2>
+      <p>
+        The screener isn't looking for companies simply spending heavily on
+        AI infrastructure — it's looking for companies whose operating
+        cash flow has started to cover that spend. That's the inflection
+        point where a capex cycle turns from narrative into fundamentals:
+      </p>
+      <ul>
+        <li><strong>Capex intensity</strong> (capex / revenue): whether the company is genuinely ramping up build-out.</li>
+        <li><strong>OCF coverage of capex</strong> (operating cash flow / capex): whether that build-out is already being funded by the company's own cash generation rather than external financing. This is the core signal for "cash flow starting to cover it."</li>
+        <li><strong>FCF margin</strong> ((OCF − capex) / revenue): combines the two into a single check of whether the company is still generating cash while it expands.</li>
+      </ul>
+
+      <h2>Known limitations (disclosed honestly)</h2>
+      <ul>
+        <li><strong>Survivorship bias</strong>: sector constituent lists reflect the present, excluding delisted or reclassified names, biasing results toward currently-surviving, better-performing companies.</li>
+        <li><strong>Quote coverage gaps</strong>: the Moomoo OpenAPI currently doesn't support Singapore, Japanese or Australian market quotes, so the architecture has to switch data sources per market.</li>
+        <li><strong>Reporting cadence differences</strong>: non-US tickers (e.g. Australian equities) typically report half-yearly rather than quarterly, so the "last 8 quarters" assumption doesn't hold there and the pipeline auto-falls-back to annual data with an explicit label.</li>
+        <li><strong>Keyword-based line item matching</strong>: financial statement line items are matched by keyword rather than a stable field ID, since Moomoo's API field naming can vary by version — a known fragility that could be hardened with an official field ID lookup table.</li>
+      </ul>
+
+      <div class="about-links">
+        <p>Source code: <a href="#">GitHub Repository (link to be added on deployment)</a></p>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

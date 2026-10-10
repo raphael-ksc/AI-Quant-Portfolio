@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Learning Notes · 學習筆記</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<div class="terminal">
+  <header class="topbar">
+    <div class="topbar-title">
+      <span class="topbar-mark">◆</span>
+      <span data-i18n="site_title">量化自選股數據終端</span>
+    </div>
+    <nav class="topbar-nav">
+      <a href="{{ url_for('index') }}" data-i18n="nav_dashboard">回到終端</a>
+      <a href="{{ url_for('screener_page') }}" data-i18n="nav_screener">多因子選股</a>
+      <a href="{{ url_for('about') }}" data-i18n="nav_about">架構說明</a>
+      <button id="langToggle" class="lang-toggle" type="button">EN</button>
+    </nav>
+  </header>
+
+  <div class="notes-page">
+
+    <!-- 繁體中文版 -->
+    <article class="notes-content lang-zh" id="notesZh">
+      <h1>第三節課學習筆記：打造數字化辦公室</h1>
+
+      <h3>這節課在做什麼</h3>
+      <p>
+        這節課的主題是「基礎設施打造」，目標是把量化交易的開發環境從零建立起來，
+        分成兩大部分：一是 AI 輔助程式設計工具（Cursor、Trae、Claude Code、Codex）
+        與 Python 開發環境的建置；二是量化交易軟體與數據源的接軌，
+        課程原始教材以中國大陸的 QMT／miniQMT 為主，示範如何抓取日線、分鐘線、
+        財務數據，並在最後銜接到「多因子選股」的作業主題。
+      </p>
+
+      <h3>我做了什麼</h3>
+      <p>
+        因為我是台灣居民，無法使用 QMT，所以整堂課的重點變成「把 QMT 的邏輯
+        改寫成我實際能用的工具」。具體完成的事情包括：
+      </p>
+      <ul>
+        <li>確認並開通 Moomoo（新加坡版）帳戶的 OpenAPI 使用權限</li>
+        <li>下載安裝 moomoo OpenD 閘道程式，並成功登入連線</li>
+        <li>安裝 <code>moomoo-api</code> Python 套件，驗證 <code>import moomoo as ft</code> 可正常運作</li>
+        <li>釐清行情權限的關鍵限制：新加坡、日本、澳洲市場的行情數據
+          目前並非 Moomoo/Futu OpenAPI 支援範圍，僅港股與美股可用</li>
+        <li>為作業選定三檔標的：Palantir（PLTR，美股）、IREN（原以為是澳股，
+          查證後確認其實是純美股掛牌）、必和必拓（BHP，改用 yfinance 抓取
+          澳交所 BHP.AX 版本）</li>
+        <li>設計一套「雙資料源」的資料抓取架構：Moomoo API 負責美股，
+          yfinance 負責澳股，並統一整理成同一種資料格式</li>
+        <li>把資料抓取邏輯包裝成一個本機網頁小工具，可以按按鈕即時抓取
+          K 線圖與財務數據</li>
+      </ul>
+
+      <h3>整體流程</h3>
+      <ol>
+        <li>釐清自己的身分與券商限制（非中國大陸居民 → 排除 QMT）</li>
+        <li>確認替代方案（老師建議：Futu Moomoo Algo）</li>
+        <li>開通交易帳戶、完成合規問卷、下載安裝 OpenD 閘道程式</li>
+        <li>安裝對應的 Python SDK，驗證連線成功</li>
+        <li>檢查實際的行情權限範圍，調整選股標的以符合權限現況</li>
+        <li>設計資料抓取架構（分資料源模組、統一格式層、風險檢查）</li>
+        <li>把架構包裝成可互動的網頁工具，方便重複使用與展示成果</li>
+      </ol>
+
+      <h3>學到了什麼</h3>
+      <ul>
+        <li>
+          <strong>工具選擇要先確認自己的合法使用範圍</strong>：不能因為課程教材用什麼
+          就照抄，需要先確認自己的身分、地區、券商限制，再回頭調整整個技術架構。
+        </li>
+        <li>
+          <strong>「帳戶開通了」不代表「API 權限就有」</strong>：交易帳戶、合規問卷、
+          行情權限是三個不同層次的關卡，缺一不可。
+        </li>
+        <li>
+          <strong>不要憑直覺判斷一檔股票屬於哪個市場</strong>：IREN 雖然是澳洲公司、
+          總部在雪梨，但實際只在美股掛牌，這種「公司起源地」與「實際交易市場」
+          不一致的情況，在做多市場策略時必須逐一查證，不能用常識猜測。
+        </li>
+        <li>
+          <strong>資料源的架構要為「可替換」而設計</strong>：把不同資料源包裝成獨立模組，
+          未來換資料源只需要換一個檔案，不用重寫整套邏輯。
+        </li>
+        <li>
+          <strong>幣別是容易被忽略的風險點</strong>：PLTR/IREN 是美元計價，
+          BHP 是澳幣計價，混在一起比較會產生誤導，必須在資料架構中明確標註。
+        </li>
+      </ul>
+
+      <p class="notes-footer">
+        免責聲明：本筆記為課程學習記錄，內容僅供教育與研究用途，
+        不構成任何投資建議。
+      </p>
+    </article>
+
+    <!-- English (Australian) Version -->
+    <article class="notes-content lang-en hidden" id="notesEn">
+      <h1>Lesson 3 Learning Notes: Building the Digital Office</h1>
+
+      <h3>What this lesson covered</h3>
+      <p>
+        This lesson focused on setting up the infrastructure for quantitative
+        trading from scratch, across two areas: AI-assisted coding tools
+        (Cursor, Trae, Claude Code and Codex) alongside a Python development
+        environment; and connecting quant trading software to a data source.
+        The original course materials centre on QMT/miniQMT, which are
+        mainland Chinese platforms, demonstrating how to retrieve daily bars,
+        minute bars and financial data, leading into the homework topic of
+        multi-factor stock selection.
+      </p>
+
+      <h3>What I did</h3>
+      <p>
+        As a Taiwan resident, I am unable to use QMT, so the core of this
+        lesson became translating the QMT-based logic into tools I can
+        actually use. Specifically, I:
+      </p>
+      <ul>
+        <li>Confirmed and activated OpenAPI access on my Moomoo (Singapore) account</li>
+        <li>Downloaded and installed the moomoo OpenD gateway, and connected successfully</li>
+        <li>Installed the <code>moomoo-api</code> Python package and verified <code>import moomoo as ft</code> works</li>
+        <li>Identified a key limitation: Singapore, Japanese and Australian
+          market quotes are not currently supported by the Moomoo/Futu
+          OpenAPI — only Hong Kong and US markets are available</li>
+        <li>Selected three tickers for the homework: Palantir (PLTR, US-listed),
+          IREN (initially assumed to be Australian, but verified to be
+          solely Nasdaq-listed), and BHP Group (switched to yfinance to
+          retrieve the ASX-listed BHP.AX line, quoted in AUD)</li>
+        <li>Designed a dual-source data pipeline: Moomoo API for US equities,
+          yfinance for the Australian listing, unified into a single schema</li>
+        <li>Wrapped the retrieval logic into a local web dashboard with a
+          button that fetches candlestick charts and financial data on demand</li>
+      </ul>
+
+      <h3>Overall workflow</h3>
+      <ol>
+        <li>Clarified my residency and brokerage constraints (not a mainland
+          China resident, so QMT was ruled out)</li>
+        <li>Confirmed an alternative (recommended by the instructor: Futu Moomoo Algo)</li>
+        <li>Opened a trading account, completed the compliance questionnaire,
+          and installed the OpenD gateway</li>
+        <li>Installed the matching Python SDK and verified the connection</li>
+        <li>Checked the actual scope of my quote permissions and adjusted
+          the chosen tickers accordingly</li>
+        <li>Designed the data retrieval architecture (source-specific modules,
+          a unified schema layer, and a risk checklist)</li>
+        <li>Wrapped the architecture into an interactive web tool for
+          repeatable use and presentation</li>
+      </ol>
+
+      <h3>What I learnt</h3>
+      <ul>
+        <li>
+          <strong>Confirm your legitimate scope of use before choosing tools</strong> —
+          rather than copying whatever the course materials use, you need to
+          check your residency, region and brokerage constraints first, then
+          adapt the technical architecture accordingly.
+        </li>
+        <li>
+          <strong>An opened account doesn't automatically mean API access</strong> —
+          the trading account, the compliance questionnaire and the quote
+          permissions are three separate gates, and all three are required.
+        </li>
+        <li>
+          <strong>Don't assume a stock's market based on intuition</strong> —
+          IREN is an Australian-founded, Sydney-headquartered company, yet
+          it is solely listed on Nasdaq. This mismatch between a company's
+          origin and its actual listing venue needs to be verified case by
+          case when building a multi-market strategy, not assumed.
+        </li>
+        <li>
+          <strong>Design the data source layer to be swappable</strong> —
+          wrapping each data source in its own module means switching
+          providers later only requires changing one file, not rewriting
+          the whole pipeline.
+        </li>
+        <li>
+          <strong>Currency is an easily overlooked risk</strong> — PLTR and
+          IREN are USD-denominated while BHP is AUD-denominated; mixing
+          them without labelling the currency would be misleading, so this
+          must be made explicit in the data schema.
+        </li>
+      </ul>
+
+      <p class="notes-footer">
+        Disclaimer: these notes are a record of course learning for
+        educational and research purposes only, and do not constitute
+        investment advice.
+      </p>
+    </article>
+
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

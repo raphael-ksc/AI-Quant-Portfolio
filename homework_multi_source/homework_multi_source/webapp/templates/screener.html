@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Factor Screener · 多因子選股</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<div class="terminal">
+  <header class="topbar">
+    <div class="topbar-title">
+      <span class="topbar-mark">◆</span>
+      <span data-i18n="site_title">量化自選股數據終端</span>
+    </div>
+    <nav class="topbar-nav">
+      <a href="{{ url_for('index') }}" data-i18n="nav_dashboard">回到終端</a>
+      <a href="{{ url_for('notes') }}" data-i18n="nav_notes">學習筆記</a>
+      <a href="{{ url_for('about') }}" data-i18n="nav_about">架構說明</a>
+      <button id="langToggle" class="lang-toggle" type="button">EN</button>
+    </nav>
+  </header>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <p class="sidebar-label" data-i18n="label_plate">板塊關鍵字</p>
+        <input id="plateInput" class="text-input" type="text"
+               placeholder="e.g. semiconductor" value="semiconductor" />
+      </div>
+
+      <div class="sidebar-block">
+        <p class="sidebar-label" data-i18n="label_roe">ROE 門檻（TTM，%）</p>
+        <input id="roeInput" class="text-input" type="number" value="15" />
+      </div>
+
+      <div class="sidebar-block">
+        <p class="sidebar-label" data-i18n="label_maxn">候選股數量上限</p>
+        <input id="maxnInput" class="text-input" type="number" value="30" max="30" />
+      </div>
+
+      <button id="screenBtn" class="fetch-btn" type="button" data-i18n="btn_screen">
+        執行篩選
+      </button>
+
+      <p id="screenStatus" class="status-line"></p>
+
+      <div class="sidebar-block criteria-note">
+        <p class="sidebar-label" data-i18n="label_criteria">篩選條件</p>
+        <ul class="criteria-list">
+          <li data-i18n="criteria_1">ROE (TTM) &gt; 門檻</li>
+          <li data-i18n="criteria_2">資本支出強度呈上升趨勢</li>
+          <li data-i18n="criteria_3">營運現金流覆蓋率呈上升趨勢</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="chart-section">
+        <div class="section-head">
+          <h2 data-i18n="results_title">篩選結果</h2>
+        </div>
+        <div class="table-wrap">
+          <table id="resultsTable" class="financials-table results-table">
+            <thead>
+              <tr>
+                <th data-i18n="col_ticker">股票代碼</th>
+                <th data-i18n="col_roe">ROE (TTM)</th>
+                <th data-i18n="col_capex">Capex 強度趨勢</th>
+                <th data-i18n="col_ocf">OCF 覆蓋率趨勢</th>
+                <th data-i18n="col_fcf">FCF Margin（最新季）</th>
+                <th data-i18n="col_passed">通過</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+<script src="{{ url_for('static', filename='screener.js') }}"></script>
+</body>
+</html>
