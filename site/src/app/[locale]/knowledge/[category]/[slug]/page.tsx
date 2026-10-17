@@ -53,7 +53,11 @@ export default async function NotePage({ params }: { params: Params }) {
         )}
       </header>
       {locale === 'en-AU' && !note.body_en && <Notice>{t.englishPending}</Notice>}
-      <MarkdownBody source={locale === 'en-AU' && note.body_en ? note.body_en : note.body} />
+      <MarkdownBody
+        source={locale === 'en-AU' && note.body_en ? note.body_en : note.body}
+        baseDir={note.path.split('/').slice(0, -1).join('/')}
+        locale={locale}
+      />
     </article>
   );
 }

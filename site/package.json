@@ -8,7 +8,8 @@
     "dev": "next dev",
     "prebuild": "node scripts/ensure-data.mjs",
     "build": "next build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/links.test.mts"
   },
   "dependencies": {
     "@heroui/react": "3.2.6",

@@ -67,6 +67,10 @@ jobs:
         working-directory: site
         run: npm ci
 
+      - name: Site unit tests
+        working-directory: site
+        run: npm test
+
       - name: Build static site
         working-directory: site
         run: npm run build

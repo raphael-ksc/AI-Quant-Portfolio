@@ -43,6 +43,9 @@ export default async function CheckinPage({ params }: { params: Params }) {
     [t.fields.source, c.source],
   ];
 
+  // 內文已經用 ![](…) 插入的圖，不在上方圖片區重複顯示
+  const body = useEnglish ? c.body_en! : c.body;
+  const gallery = c.figures.filter((f) => !body.includes(f.slice(c.path.length + 1)));
   return (
     <article className="space-y-6">
       <Link href={`/${locale}/checkins/`} className="text-sm text-link">
@@ -86,9 +89,9 @@ export default async function CheckinPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {c.figures.length > 0 && (
+      {gallery.length > 0 && (
         <section className="grid gap-4 sm:grid-cols-2">
-          {c.figures.map((f) => (
+          {gallery.map((f) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img key={f} src={`${BASE_PATH}/${f}`} alt={f.split('/').pop() ?? ''} className="w-full rounded border border-border" />
           ))}
@@ -97,7 +100,7 @@ export default async function CheckinPage({ params }: { params: Params }) {
 
       <section>
         {locale === 'en-AU' && !c.body_en && <Notice>{t.englishPending}</Notice>}
-        <MarkdownBody source={useEnglish ? c.body_en! : c.body} />
+        <MarkdownBody source={body} baseDir={c.path} locale={locale} />
       </section>
 
       <p className="text-sm">

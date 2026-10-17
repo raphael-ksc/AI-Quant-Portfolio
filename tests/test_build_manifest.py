@@ -109,6 +109,14 @@ def test_outputs_existing_files_pass(tmp_path):
     assert c['metrics'] == 'lessons/L01-test/C01-demo/outputs/metrics.json'
 
 
+def test_inline_images_must_be_listed_in_figures():
+    figures = ['outputs/figures/eq.png']
+    ok = '![淨值](outputs/figures/eq.png) ![外部](https://x.org/a.png) ![站內](/logo.png) ![點](./outputs/figures/eq.png)'
+    assert bm.inline_image_errors('c.md', [ok], figures) == []
+    errs = bm.inline_image_errors('c.md', ['![漏列](outputs/figures/dd.png)'], figures)
+    assert len(errs) == 1 and 'outputs/figures/dd.png' in errs[0]
+
+
 def test_write_outputs(tmp_path):
     m = bm.build(make_repo(tmp_path / 'repo'), today=TODAY)
     bm.write_outputs(m, tmp_path / 'out')

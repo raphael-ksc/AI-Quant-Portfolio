@@ -173,6 +173,23 @@ def validate_checkin(meta: dict, cdir: Path, root: Path, today: dt.date) -> list
     return errs
 
 
+INLINE_IMAGE_RE = re.compile(r'!\[[^\]]*\]\(\s*<?([^)\s>]+)')
+ABSOLUTE_URL_RE = re.compile(r'^([a-z][a-z0-9+.-]*:|//|/)', re.I)
+
+
+def inline_image_errors(where: str, bodies: list[str], figures: list[str]) -> list[str]:
+    """內文用相對路徑插的圖，必須列在 outputs.figures：網站建置時只會複製這些圖到 public/。"""
+    listed = {str(Path(p).as_posix()).removeprefix('./') for p in figures}
+    errs = []
+    for body in bodies:
+        for src in INLINE_IMAGE_RE.findall(body):
+            if ABSOLUTE_URL_RE.match(src):
+                continue
+            if src.removeprefix('./') not in listed:
+                errs.append(f'{where}: 內文圖片 {src} 沒有列在 outputs.figures（網站上會顯示不出來）')
+    return sorted(set(errs))
+
+
 def load_checkins(root: Path, lessons: dict, errors: list[str], today: dt.date) -> list[dict]:
     checkins = []
     for f in sorted(root.glob('lessons/L*/C*/checkin.md')):
@@ -195,6 +212,7 @@ def load_checkins(root: Path, lessons: dict, errors: list[str], today: dt.date) 
             body_en = (m.group(2) if m else text).lstrip('\n')
 
         outputs = meta.get('outputs') if isinstance(meta.get('outputs'), dict) else {}
+        errors += inline_image_errors(rel(f, root), [body, body_en or ''], outputs.get('figures') or [])
         base = rel(cdir, root)
         checkins.append({
             'id': meta.get('id'),
@@ -265,6 +283,8 @@ def load_knowledge(root: Path, checkin_ids: set, errors: list[str]) -> list[dict
             related = nmeta.get('related') or []
             errors += [f'{nwhere}: related 找不到打卡 {r}' for r in related if r not in checkin_ids]
             en_file = note.with_name(note.stem + EN_SUFFIX)
+            en_body = en_file.read_text(encoding='utf-8') if en_file.is_file() else ''
+            errors += inline_image_errors(nwhere, [nbody, en_body], [])  # 筆記的圖片不會被複製到網站
             notes.append({
                 'slug': note.stem,
                 'title': nmeta.get('title'),

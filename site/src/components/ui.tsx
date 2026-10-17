@@ -1,8 +1,9 @@
 // 伺服器端共用元件：直接使用 HeroUI 的 BEM CSS class（card、chip），不需載入 React 互動層
 import Link from 'next/link';
-import Markdown from 'react-markdown';
+import Markdown, { defaultUrlTransform } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getDict, pick, type Locale } from '@/lib/i18n';
+import { resolveUrl } from '@/lib/links';
 import type { Checkin, Status } from '@/lib/types';
 
 const STATUS_COLOR: Record<Status, string> = {
@@ -59,10 +60,15 @@ export function CheckinCard({
   );
 }
 
-export function MarkdownBody({ source }: { source: string }) {
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
+// baseDir：這份 Markdown 在 repo 中的目錄；內文的相對圖片與連結依此改寫（規則見 lib/links.ts）
+export function MarkdownBody({ source, baseDir, locale }: { source: string; baseDir: string; locale: Locale }) {
+  const transform = (url: string, key: string) =>
+    resolveUrl(defaultUrlTransform(url), key === 'src' ? 'image' : 'link', { baseDir, basePath: BASE_PATH, locale });
   return (
     <div className="prose">
-      <Markdown remarkPlugins={[remarkGfm]}>{source}</Markdown>
+      <Markdown remarkPlugins={[remarkGfm]} urlTransform={transform}>{source}</Markdown>
     </div>
   );
 }
