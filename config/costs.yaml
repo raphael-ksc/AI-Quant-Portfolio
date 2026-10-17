@@ -1,0 +1,38 @@
+# 美股交易成本設定（C13 起各回測題共用）
+#
+# ⚠️ 券商費率依「開戶的 Moomoo 實體」與收費方案而不同。以下 moomoo_reference 取自 Moomoo Canada 官方公開頁，
+#    只當參考值；使用者實際帳戶方案確認後，再新增一組 profile。回測另做滑價／成本敏感度分析涵蓋不確定性。
+# 監管費用（SEC、FINRA TAF）會隨時間調整，因此用「生效日」分段，回測依成交日期套用當時費率。
+
+profiles:
+  moomoo_reference:
+    description: Moomoo Canada 公開費率（股價 ≥ 1 美元）
+    source: 'Moomoo Canada，US stock & ETF fees（https://moomoo.com/ca/support/topic10_122），查閱日期：2026-10-17'
+    commission_per_share: 0.0049
+    commission_min: 0.99
+    platform_per_share: 0.005
+    platform_min: 1.00
+  zero_cost:
+    description: 不計任何成本（只用於敏感度分析，對照用）
+    source: —
+    commission_per_share: 0.0
+    commission_min: 0.0
+    platform_per_share: 0.0
+    platform_min: 0.0
+    regulatory: false
+
+# 只在賣出時收取；rate 為每 1 美元成交金額的費率
+sec_fee:
+  minimum: 0.01
+  source: 'SEC Fee Rate Advisory 2025-2、2026-2（https://www.sec.gov/rules-regulations/fee-rate-advisories/2026-2），查閱日期：2026-10-17'
+  schedule:
+    - {effective: 2024-05-22, rate: 0.0000278}   # 每百萬 27.80 美元
+    - {effective: 2025-05-14, rate: 0.0}         # 年中調整為 0
+    - {effective: 2026-04-04, rate: 0.0000206}   # 每百萬 20.60 美元
+
+# FINRA 交易活動費（Trading Activity Fee），只在賣出時收取，每股計費並有單筆上限
+finra_taf:
+  source: 'FINRA By-Laws Schedule A Section 1；2026 年費率取自券商公告，尚待 FINRA 官方公告確認（查閱日期：2026-10-17）'
+  schedule:
+    - {effective: 2024-01-01, per_share: 0.000166, cap: 8.30}
+    - {effective: 2026-01-01, per_share: 0.000195, cap: 9.79}

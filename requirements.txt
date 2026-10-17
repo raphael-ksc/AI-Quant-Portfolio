@@ -8,6 +8,8 @@ pyyaml==6.0.3
 # 資料庫
 pymysql==1.2.3
 python-dotenv==1.2.4
+# 回測
+backtrader==1.9.78.123
 # 測試
 pytest==9.1.1
 # 圖表

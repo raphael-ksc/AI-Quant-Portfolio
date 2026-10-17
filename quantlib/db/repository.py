@@ -131,6 +131,23 @@ class MySQLRepository:
         return pd.DataFrame({'date': pd.to_datetime([r[0] for r in rows]),
                              'close': [float(r[1]) for r in rows]})
 
+    def load_bars(self, symbol: str, start: dt.date, end: dt.date, *, source: str = 'moomoo',
+                  adjust: str = 'qfq') -> pd.DataFrame:
+        """讀回統一格式的日線（給回測使用），start 與 end 皆包含。"""
+        with self.conn.cursor() as cur:
+            cur.execute('SELECT trade_date, open, high, low, close, volume, currency FROM market_daily '
+                        'WHERE symbol=%s AND source=%s AND adjust=%s AND trade_date BETWEEN %s AND %s '
+                        'ORDER BY trade_date', (symbol, source, adjust, start, end))
+            rows = cur.fetchall()
+        if not rows:
+            raise LookupError(f'market_daily 沒有 {symbol}（{source}/{adjust}）{start}～{end} 的資料，請先跑 C06')
+        df = pd.DataFrame(rows, columns=['date', 'open', 'high', 'low', 'close', 'volume', 'currency'])
+        df['date'] = pd.to_datetime(df['date'])
+        for c in ('open', 'high', 'low', 'close', 'volume'):
+            df[c] = df[c].astype(float)
+        df['symbol'], df['adjust'], df['source'] = symbol, adjust, source
+        return df
+
     def earliest_date(self, symbol: str, source: str, adjust: str) -> dt.date | None:
         with self.conn.cursor() as cur:
             cur.execute('SELECT MIN(trade_date) FROM market_daily WHERE symbol=%s AND source=%s AND adjust=%s',
