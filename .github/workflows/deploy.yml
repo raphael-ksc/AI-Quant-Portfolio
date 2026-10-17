@@ -19,6 +19,18 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # 一次性的 MySQL 容器，只給 tests/test_db_mysql.py 整合測試使用（帳密僅存在於這個 CI 容器）
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ci
+          MYSQL_DATABASE: quant_portfolio_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "mysqladmin ping -h 127.0.0.1 --silent"
+          --health-interval 5s --health-timeout 3s --health-retries 20
     steps:
       - uses: actions/checkout@v7
 
@@ -27,10 +39,17 @@ jobs:
           python-version: '3.13'
 
       - name: Install Python test dependencies
-        run: pip install pyyaml==6.0.3 pytest==9.1.1 pandas==3.0.6
+        run: pip install pyyaml==6.0.3 pytest==9.1.1 pandas==3.0.6 pymysql==1.2.3
 
-      - name: Unit tests
-        run: pytest tests -q
+      - name: Unit and MySQL integration tests
+        env:
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_PORT: '3306'
+          MYSQL_USER: root
+          MYSQL_PASSWORD: ci
+          MYSQL_DATABASE: quant_portfolio
+          MYSQL_TEST_DATABASE: quant_portfolio_test
+        run: pytest tests -q -rs
 
       - name: Validate check-ins and build manifest
         run: python scripts/build_manifest.py

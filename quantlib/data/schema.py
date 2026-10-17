@@ -17,6 +17,8 @@ DAILY_COLUMNS = ['symbol', 'date', 'open', 'high', 'low', 'close', 'volume',
                  'adjust', 'currency', 'source']
 MINUTE_COLUMNS = ['symbol', 'ts', 'open', 'high', 'low', 'close', 'volume',
                   'adjust', 'currency', 'source']
+# 日線選填欄位：資料源有提供才保留（yfinance 沒有）；turnover_rate 為比例，不是百分比
+OPTIONAL_DAILY_COLUMNS = ['amount', 'turnover_rate']
 FINANCIAL_COLUMNS = ['symbol', 'source', 'statement', 'field_id', 'name', 'period_end',
                      'fiscal_period', 'freq', 'value', 'currency', 'announce_date']
 
@@ -67,6 +69,8 @@ def validate_bars(df: pd.DataFrame, kind: str = 'daily') -> pd.DataFrame:
     if kind == 'minute' and getattr(df['ts'].dt, 'tz', None) is None:
         raise SchemaError('分鐘線的 ts 必須帶時區')
     _single_value_per_symbol(df, 'currency', f'{kind} K 線')
+    if kind == 'daily':
+        columns = columns + [c for c in OPTIONAL_DAILY_COLUMNS if c in df.columns]
     return df[columns].sort_values(['symbol', time_col]).reset_index(drop=True)
 
 

@@ -112,6 +112,9 @@ class MoomooSource(DataSource):
             'low': raw['low'].astype(float),
             'close': raw['close'].astype(float),
             'volume': raw['volume'].astype(float),
+            # 選填欄位：turnover 為成交額；turnover_rate 為比例（0.0115 = 1.15%），2026-10-17 實測
+            'amount': raw['turnover'].astype(float) if 'turnover' in raw else float('nan'),
+            'turnover_rate': raw['turnover_rate'].astype(float) if 'turnover_rate' in raw else float('nan'),
         })
         df['adjust'], df['currency'], df['source'] = adjust, symbol.currency, self.name
         return df.drop_duplicates(['symbol', 'date']).reset_index(drop=True)

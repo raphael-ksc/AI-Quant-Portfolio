@@ -42,7 +42,7 @@ def scan_text(text: str) -> list[str]:
     for no, line in enumerate(text.splitlines(), start=1):
         m = ASSIGNMENT.search(line)
         if m:
-            value = m.group('value')
+            value = m.group('value').rstrip(',;)')  # 函式參數 password=self.password, 的結尾符號
             is_code = bool(CODE_EXPR.match(value)) and any(ch in value for ch in '.([')
             if (value.lower() not in PLACEHOLDERS and not is_code
                     and not value.startswith(('$', '{', '<', '%'))):

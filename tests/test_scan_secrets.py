@@ -26,6 +26,7 @@ def test_detects_secrets(line):
     'password = os.environ["MYSQL_PASSWORD"]',  # 從環境變數讀取
     "password=os.getenv('MYSQL_PASSWORD')",
     'password=config.mysql_password',
+    'host=self.host, user=self.user, password=self.password,',  # 函式參數，結尾有逗號
     'password: ${{ secrets.DB_PASSWORD }}',
     '設環境變數 `WUCAI_SQL_PASSWORD`，絕不可 commit',
 ])

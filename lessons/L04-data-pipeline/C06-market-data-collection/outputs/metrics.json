@@ -1,0 +1,134 @@
+{
+  "generated_on": "2026-10-17",
+  "versions": {
+    "moomoo-api": "10.11.7108",
+    "yfinance": "1.7.0",
+    "pandas": "3.0.6",
+    "pymysql": "1.2.3"
+  },
+  "last_run": {
+    "source": "moomoo",
+    "mode": "incremental",
+    "status": "success",
+    "last_closed_session": "2026-10-16",
+    "rows_written": 8,
+    "results": [
+      {
+        "symbol": "PLTR",
+        "adjust": "qfq",
+        "reason": "incremental",
+        "rows": 8,
+        "start": "2026-10-07",
+        "end": "2026-10-16",
+        "mismatched_dates": []
+      },
+      {
+        "symbol": "IREN",
+        "adjust": "qfq",
+        "reason": "up_to_date",
+        "rows": 0,
+        "start": null,
+        "end": null,
+        "mismatched_dates": []
+      },
+      {
+        "symbol": "NVDA",
+        "adjust": "qfq",
+        "reason": "up_to_date",
+        "rows": 0,
+        "start": null,
+        "end": null,
+        "mismatched_dates": []
+      },
+      {
+        "symbol": "PLTR",
+        "adjust": "none",
+        "reason": "up_to_date",
+        "rows": 0,
+        "start": null,
+        "end": null,
+        "mismatched_dates": []
+      },
+      {
+        "symbol": "IREN",
+        "adjust": "none",
+        "reason": "up_to_date",
+        "rows": 0,
+        "start": null,
+        "end": null,
+        "mismatched_dates": []
+      },
+      {
+        "symbol": "NVDA",
+        "adjust": "none",
+        "reason": "up_to_date",
+        "rows": 0,
+        "start": null,
+        "end": null,
+        "mismatched_dates": []
+      }
+    ]
+  },
+  "market_daily": [
+    {
+      "symbol": "IREN",
+      "adjust": "none",
+      "source": "moomoo",
+      "rows": 951,
+      "first": "2023-01-03",
+      "last": "2026-10-16",
+      "null_amount": 0,
+      "null_turnover": 0
+    },
+    {
+      "symbol": "IREN",
+      "adjust": "qfq",
+      "source": "moomoo",
+      "rows": 951,
+      "first": "2023-01-03",
+      "last": "2026-10-16",
+      "null_amount": 0,
+      "null_turnover": 0
+    },
+    {
+      "symbol": "NVDA",
+      "adjust": "none",
+      "source": "moomoo",
+      "rows": 951,
+      "first": "2023-01-03",
+      "last": "2026-10-16",
+      "null_amount": 0,
+      "null_turnover": 0
+    },
+    {
+      "symbol": "NVDA",
+      "adjust": "qfq",
+      "source": "moomoo",
+      "rows": 951,
+      "first": "2023-01-03",
+      "last": "2026-10-16",
+      "null_amount": 0,
+      "null_turnover": 0
+    },
+    {
+      "symbol": "PLTR",
+      "adjust": "none",
+      "source": "moomoo",
+      "rows": 951,
+      "first": "2023-01-03",
+      "last": "2026-10-16",
+      "null_amount": 0,
+      "null_turnover": 0
+    },
+    {
+      "symbol": "PLTR",
+      "adjust": "qfq",
+      "source": "moomoo",
+      "rows": 951,
+      "first": "2023-01-03",
+      "last": "2026-10-16",
+      "null_amount": 0,
+      "null_turnover": 0
+    }
+  ]
+}

@@ -54,3 +54,14 @@ cd site && npm install && npm run dev
 # 3. 測試
 .venv\Scripts\python.exe -m pytest tests
 ```
+
+### 資料庫（C06 起各題共用）
+
+```
+# 複製 .env.example 為 .env 並填入 MySQL 帳號密碼（.env 不會進 repo）
+# A. 本機 MySQL（MYSQL_PORT=3306）：第一次執行加 --init-schema 建立資料庫與資料表
+.venv\Scripts\python.exe lessons\L04-data-pipeline\C06-market-data-collection\src\ingest_daily.py --init-schema
+# B. Docker（MYSQL_PORT=3307）：不需要 Moomoo 帳號，任何人都能重現
+docker compose up -d
+.venv\Scripts\python.exe lessons\L04-data-pipeline\C06-market-data-collection\src\ingest_daily.py --source yfinance
+```

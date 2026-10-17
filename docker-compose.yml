@@ -1,0 +1,35 @@
+# 可重現的 MySQL 環境（C06 起各題共用）
+#
+# 用法（Project 根目錄，先開啟 Docker Desktop）：
+#   1. 複製 .env.example 為 .env，填 MYSQL_USER、MYSQL_PASSWORD、MYSQL_ROOT_PASSWORD
+#      （Docker 的 MYSQL_USER 不能是 root，建議用 quant_app）
+#   2. docker compose up -d          # 第一次啟動會自動執行 db/schema.sql
+#   3. .env 的 MYSQL_PORT 改成 3307，即可用同一套程式連 Docker
+#
+# 埠只綁 127.0.0.1，不對外開放；3307 避免和本機 MySQL80 的 3306 衝突。
+# 帳號密碼一律從 .env 讀取，本檔不含任何密碼。
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: quant-portfolio-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?請在 .env 設定 MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-quant_portfolio}
+      MYSQL_USER: ${MYSQL_USER:?請在 .env 設定 MYSQL_USER（不能是 root）}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?請在 .env 設定 MYSQL_PASSWORD}
+      TZ: UTC
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_ai_ci"]
+    ports:
+      - "127.0.0.1:${MYSQL_DOCKER_PORT:-3307}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  mysql-data:
