@@ -68,6 +68,6 @@ Row counts and date ranges are in [`outputs/metrics.json`](outputs/metrics.json)
 ## Limitations and reflections
 
 - The "last closed session" logic excludes weekends but not US public holidays. Data sources return no bar on a holiday, so correctness is unaffected; it just costs one extra query.
-- The course runs automatically at 15:30 each day. The US market closes at 4–5 am Taipei time, so this check-in runs manually for now. To automate it, Windows Task Scheduler can run `ingest_daily.py` daily at 06:00 Taipei time.
+- The course runs automatically at 15:30 each day. The US market closes at 4–5 am Taipei time, so this version uses Windows Task Scheduler to run `scripts/run_daily_ingest.ps1` at **06:00 Taipei time, Tuesday to Saturday** (covering US sessions Monday to Friday). The script first checks that OpenD is running; if a day fails, the next successful run fills the gap automatically. This assumes the computer is on, the user is logged in and OpenD stays logged in.
 - Moomoo's historical candlestick quota is 100 symbols per 30 days, so larger universes need quota planning or yfinance.
 - (To be completed: personal reflections)
