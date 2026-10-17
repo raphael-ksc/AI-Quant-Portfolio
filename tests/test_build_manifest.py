@@ -222,8 +222,8 @@ def test_collects_all_errors(tmp_path):
 # ---------- 真實 repo ----------
 
 def test_real_repo_is_valid():
-    """repo 本身的 24 題打卡必須通過驗證（CI 也會跑）。"""
+    """repo 本身的 36 題打卡必須通過驗證（CI 也會跑）。"""
     m = bm.build(ROOT)
-    assert m['stats']['total'] == 24
+    assert m['stats']['total'] == 36
     assert sorted(m['stats']['flagship']) == ['C08', 'C11', 'C13', 'C17', 'C21']
-    assert [c['order'] for c in m['checkins']] == list(range(1, 25))
+    assert [c['order'] for c in m['checkins']] == list(range(1, 37))

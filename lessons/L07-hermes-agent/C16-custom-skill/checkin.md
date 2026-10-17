@@ -9,7 +9,7 @@ tags: [Hermes, Skill, 複合技能]
 symbols: []
 status: todo
 phase: 5
-order: 15
+order: 21
 flagship: false
 date:
 confidence:

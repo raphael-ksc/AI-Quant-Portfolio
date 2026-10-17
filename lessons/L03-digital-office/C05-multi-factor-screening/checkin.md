@@ -9,7 +9,7 @@ tags: [多因子, 選股, Moomoo]
 symbols: []
 status: wip
 phase: 6
-order: 19
+order: 28
 flagship: false
 date:
 confidence:

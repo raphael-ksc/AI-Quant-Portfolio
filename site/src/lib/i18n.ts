@@ -72,7 +72,7 @@ const zh = {
       {
         heading: '這是什麼',
         body:
-          '我是宏觀交易員，正在系統化地補上量化交易技能。這個網站整理我在 AI 量化交易課程中的 24 題實作打卡，目標是把過去依賴經驗的判斷，轉成可以回測、可以驗證、可以重現的流程。',
+          '我是宏觀交易員，正在系統化地補上量化交易技能。這個網站整理我在 AI 量化交易課程中的 36 題實作打卡，目標是把過去依賴經驗的判斷，轉成可以回測、可以驗證、可以重現的流程。',
       },
       {
         heading: '每題的固定結構',
@@ -151,7 +151,7 @@ const en: Dict = {
       {
         heading: 'What this is',
         body:
-          "I'm a macro trader systematically adding quantitative trading skills. This site collects my 24 hands-on check-ins from an AI quantitative trading course, with one goal: turning judgement built on experience into processes that can be backtested, validated and reproduced.",
+          "I'm a macro trader systematically adding quantitative trading skills. This site collects my 36 hands-on check-ins from an AI quantitative trading course, with one goal: turning judgement built on experience into processes that can be backtested, validated and reproduced.",
       },
       {
         heading: 'Structure of every check-in',

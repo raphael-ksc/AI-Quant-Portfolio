@@ -9,7 +9,7 @@ tags: [研報, 一致預期, MySQL]
 symbols: []
 status: todo
 phase: 6
-order: 24
+order: 36
 flagship: false
 date:
 confidence:

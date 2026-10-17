@@ -9,7 +9,7 @@ tags: [纏論, chan.py, 多週期, Backtrader]
 symbols: []
 status: todo
 phase: 6
-order: 22
+order: 34
 flagship: false
 date:
 confidence:

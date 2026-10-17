@@ -9,7 +9,7 @@ tags: [MACD, 雙均線, 網格]
 symbols: []
 status: todo
 phase: 6
-order: 16
+order: 25
 flagship: false
 date:
 confidence:

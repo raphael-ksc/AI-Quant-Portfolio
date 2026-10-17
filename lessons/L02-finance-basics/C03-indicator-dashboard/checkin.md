@@ -9,7 +9,7 @@ tags: [MA, RSI, ATR, 成交量]
 symbols: []
 status: todo
 phase: 6
-order: 18
+order: 27
 flagship: false
 date:
 confidence:

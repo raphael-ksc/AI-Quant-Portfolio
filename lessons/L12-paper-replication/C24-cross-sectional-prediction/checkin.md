@@ -9,7 +9,7 @@ tags: [XGBoost, IC/ICIR, 截面預測, MASTER]
 symbols: []
 status: todo
 phase: 6
-order: 21
+order: 30
 flagship: false
 date:
 confidence:

@@ -9,7 +9,7 @@ tags: [多因子, IC, 月度調倉, Top-N]
 symbols: []
 status: todo
 phase: 6
-order: 20
+order: 29
 flagship: false
 date:
 confidence:

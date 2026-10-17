@@ -9,7 +9,7 @@ tags: [Hermes, LLM, Skill]
 symbols: []
 status: todo
 phase: 5
-order: 14
+order: 20
 flagship: false
 date:
 confidence:
