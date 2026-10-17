@@ -127,7 +127,9 @@ def test_split_sql_on_repo_schema():
     statements = split_sql(SCHEMA_FILE.read_text(encoding='utf-8'))
     heads = [s.split('(')[0].split('\n')[0].strip() for s in statements]
     assert heads == ['CREATE TABLE IF NOT EXISTS instruments', 'CREATE TABLE IF NOT EXISTS ingest_runs',
-                     'CREATE TABLE IF NOT EXISTS market_daily', 'CREATE OR REPLACE VIEW trade_stock_daily AS']
+                     'CREATE TABLE IF NOT EXISTS market_daily', 'CREATE OR REPLACE VIEW trade_stock_daily AS',
+                     'CREATE TABLE IF NOT EXISTS financial_items', 'CREATE TABLE IF NOT EXISTS financial_revisions',
+                     'CREATE TABLE IF NOT EXISTS financial_metrics', 'CREATE OR REPLACE VIEW trade_stock_financial AS']
     assert all('--' not in s for s in statements)
 
 

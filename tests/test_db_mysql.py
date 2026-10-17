@@ -65,7 +65,7 @@ def count(repo, sql, *params):
 
 
 def test_schema_is_reapplicable(repo):
-    assert repo.apply_schema() == 4  # 第二次套用不報錯
+    assert repo.apply_schema() == 8  # 第二次套用不報錯
 
 
 def test_upsert_is_idempotent_and_updates(repo):
@@ -112,3 +112,44 @@ def test_ingest_runs_lifecycle(repo):
         cur.execute('SELECT status, rows_written, finished_at IS NOT NULL FROM ingest_runs WHERE run_id=%s',
                     (run_id,))
         assert cur.fetchone() == ('success', 3, 1)
+
+
+# ======================= 財務數據（C07） =======================
+
+def fin_items(value, period='2026-06-30', fp='2026/Q2', source='moomoo'):
+    return pd.DataFrame([{
+        'symbol': 'PLTR', 'source': source, 'statement': 'income', 'field_id': '8001',
+        'name': 'Total Revenue as Reported', 'period_end': pd.Timestamp(period), 'fiscal_period': fp,
+        'freq': 'Q', 'value': value, 'currency': 'USD',
+    }])
+
+
+def test_financial_items_idempotent_and_revisions_kept(repo):
+    assert repo.upsert_financial_items(fin_items(1_003_000_000.0), run_id=None) == (1, 0)
+    assert repo.upsert_financial_items(fin_items(1_003_000_000.0), run_id=None) == (1, 0)   # 同值不算重編
+    assert repo.upsert_financial_items(fin_items(1_010_000_000.0), run_id=None) == (1, 1)   # 重編
+    assert count(repo, 'SELECT COUNT(*) FROM financial_items') == 1
+    with repo.conn.cursor() as cur:
+        cur.execute('SELECT old_value, new_value FROM financial_revisions')
+        assert [tuple(float(v) for v in r) for r in cur.fetchall()] == [(1_003_000_000.0, 1_010_000_000.0)]
+    back = repo.load_financial_items('PLTR', 'moomoo')
+    assert back['value'].iloc[0] == 1_010_000_000.0
+
+
+def test_financial_metrics_and_course_view(repo):
+    metrics = pd.DataFrame([{
+        'symbol': 'PLTR', 'source': source, 'period_end': pd.Timestamp('2026-06-30'), 'freq': 'Q',
+        'fiscal_period': '2026/Q2', 'currency': 'USD', 'filing_date': dt.date(2026, 8, 4), 'filing_form': '10-Q',
+        'available_date': dt.date(2026, 8, 5), 'available_basis': 'edgar', 'revenue': 1.0e9,
+        'net_income': 4.0e8, 'roe_ttm': 0.305, 'gross_margin_ttm': 0.848, 'debt_ratio': 0.154,
+        'current_ratio': 7.2, 'eps_basic': 0.17,
+    } for source in ('moomoo', 'yfinance')])
+    assert repo.upsert_financial_metrics(metrics, run_id=None) == 2
+    with repo.conn.cursor() as cur:
+        cur.execute('SELECT stock_code, report_date, roe, gross_margin, debt_ratio, available_date, data_source '
+                    'FROM trade_stock_financial')
+        rows = cur.fetchall()
+    assert len(rows) == 1                                            # 兩個資料源只取 Moomoo
+    code, report_date, roe, gm, dr, avail, src = rows[0]
+    assert (code, str(report_date), str(avail), src) == ('PLTR', '2026-06-30', '2026-08-05', 'moomoo')
+    assert (float(roe), float(gm), float(dr)) == pytest.approx((30.5, 84.8, 15.4))   # 換算成課程的百分比

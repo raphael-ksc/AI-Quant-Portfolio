@@ -1,0 +1,63 @@
+# 財務指標 → 候選科目（依優先順序比對，第一個找到的就用）
+#
+# 課程第 4 課 p.46 的 get_field 多候選查找：同一個指標在不同公司、不同期、不同資料源的科目可能不同。
+# Moomoo 一律用 (statement, field_id) 比對：field_id 只在同一張報表內唯一（例：8017 在利潤表是 Operating Profit、
+# 在現金流量表是 Net Income from Continuing Operations），所以每個候選都要寫報表。
+# 科目代碼來源：docs/moomoo_financial_fields_NVDA.md（2026-10-10 實測）與 2026-10-17 對 PLTR / IREN / NVDA 的實測。
+# 某期所有候選都找不到時，該期該指標留空並記錄在報告中，不推算、不猜。
+#
+# kind：flow = 期間累計（季報為單季值，可加總成近四季合計）；stock = 期末時點值（不可加總）
+
+metrics:
+  revenue:
+    kind: flow
+    moomoo: [[income, '8001'], [income, '8002']]          # Total Revenue as Reported；IREN 早期只有 Total Operating Revenue
+    yfinance: [[income, TotalRevenue], [income, OperatingRevenue]]
+  gross_profit:
+    kind: flow
+    moomoo: [[income, '8004']]
+    yfinance: [[income, GrossProfit]]
+  net_income:
+    kind: flow
+    moomoo: [[income, '8043'], [income, '8046']]          # 歸屬母公司淨利 → 歸屬普通股股東淨利
+    yfinance: [[income, NetIncomeCommonStockholders], [income, NetIncome]]
+  eps_basic:
+    kind: flow
+    moomoo: [[income, '8047']]
+    yfinance: [[income, BasicEPS]]
+  eps_diluted:
+    kind: flow
+    moomoo: [[income, '8048']]
+    yfinance: [[income, DilutedEPS]]
+  ocf:
+    kind: flow
+    moomoo: [[cashflow, '8015']]                          # Operating Cash Flow
+    yfinance: [[cashflow, OperatingCashFlow]]
+  capex:
+    kind: flow
+    moomoo: [[cashflow, '8046']]                          # Net PPE Purchase and Sale（負值 = 流出）
+    yfinance: [[cashflow, CapitalExpenditure]]
+  fcf:
+    kind: flow
+    moomoo: [[cashflow, '8072']]                          # Moomoo 現成的 Free Cash Flow
+    yfinance: [[cashflow, FreeCashFlow]]
+  total_assets:
+    kind: stock
+    moomoo: [[balance, '8001']]
+    yfinance: [[balance, TotalAssets]]
+  current_assets:
+    kind: stock
+    moomoo: [[balance, '8002']]
+    yfinance: [[balance, CurrentAssets]]
+  total_liabilities:
+    kind: stock
+    moomoo: [[balance, '8048']]
+    yfinance: [[balance, TotalLiabilitiesNetMinorityInterest]]
+  current_liabilities:
+    kind: stock
+    moomoo: [[balance, '8049']]
+    yfinance: [[balance, CurrentLiabilities]]
+  total_equity:
+    kind: stock
+    moomoo: [[balance, '8081'], [balance, '8085']]        # Total Equity → Stockholders' Equity
+    yfinance: [[balance, StockholdersEquity], [balance, CommonStockEquity]]

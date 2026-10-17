@@ -179,3 +179,117 @@ class MySQLRepository:
                         'GROUP BY symbol, adjust, source ORDER BY symbol, adjust, source')
             keys = ('symbol', 'adjust', 'source', 'rows', 'first', 'last', 'null_amount', 'null_turnover')
             return [dict(zip(keys, r)) for r in cur.fetchall()]
+
+    # ---------- 財務數據（C07） ----------
+
+    def upsert_financial_items(self, items: pd.DataFrame, run_id: int | None) -> tuple[int, int]:
+        """寫入財報長表；數值和庫中不同時，舊值先寫入 financial_revisions。回傳（寫入筆數, 重編筆數）。"""
+        if items.empty:
+            return 0, 0
+        key_cols = ('symbol', 'source', 'freq')
+        keys = items[list(key_cols)].drop_duplicates().itertuples(index=False)
+        existing = {}
+        with self.conn.cursor() as cur:
+            for sym, src, freq in keys:
+                cur.execute('SELECT statement, field_id, period_end, value FROM financial_items '
+                            'WHERE symbol=%s AND source=%s AND freq=%s', (sym, src, freq))
+                for st, fid, pe, val in cur.fetchall():
+                    existing[(sym, src, freq, st, fid, pe)] = None if val is None else float(val)
+
+        rows, revisions = [], []
+        for r in items.itertuples(index=False):
+            pe = pd.Timestamp(r.period_end).date()
+            value = _clean(r.value, 6)
+            rows.append((r.symbol, r.source, r.statement, str(r.field_id), r.name, pe, r.fiscal_period,
+                         r.freq, value, r.currency, run_id))
+            key = (r.symbol, r.source, r.freq, r.statement, str(r.field_id), pe)
+            if key in existing and not _same(existing[key], value):
+                revisions.append((r.symbol, r.source, r.statement, str(r.field_id), pe, r.freq,
+                                  existing[key], value, run_id))
+        try:
+            with self.conn.cursor() as cur:
+                if revisions:
+                    cur.executemany(INSERT_REVISION, revisions)
+                for i in range(0, len(rows), BATCH_SIZE):
+                    cur.executemany(UPSERT_FIN_ITEM, rows[i:i + BATCH_SIZE])
+            self.conn.commit()
+        except Exception:
+            self.conn.rollback()
+            raise
+        return len(rows), len(revisions)
+
+    def upsert_financial_metrics(self, metrics: pd.DataFrame, run_id: int | None) -> int:
+        rows = []
+        for r in metrics.to_dict('records'):
+            row = []
+            for c in FIN_METRIC_COLUMNS:
+                v = run_id if c == 'run_id' else r.get(c)
+                if c in ('period_end', 'filing_date', 'available_date') and v is not None and not _is_na(v):
+                    v = pd.Timestamp(v).date()
+                row.append(None if _is_na(v) else (_clean(v, 8) if isinstance(v, float) else v))
+            rows.append(tuple(row))
+        try:
+            with self.conn.cursor() as cur:
+                for i in range(0, len(rows), BATCH_SIZE):
+                    cur.executemany(UPSERT_FIN_METRIC, rows[i:i + BATCH_SIZE])
+            self.conn.commit()
+        except Exception:
+            self.conn.rollback()
+            raise
+        return len(rows)
+
+    def load_financial_items(self, symbol: str, source: str, freq: str = 'Q') -> pd.DataFrame:
+        with self.conn.cursor() as cur:
+            cur.execute('SELECT symbol, source, statement, field_id, name, period_end, fiscal_period, freq, '
+                        'value, currency FROM financial_items WHERE symbol=%s AND source=%s AND freq=%s',
+                        (symbol, source, freq))
+            rows = cur.fetchall()
+        cols = ['symbol', 'source', 'statement', 'field_id', 'name', 'period_end', 'fiscal_period', 'freq',
+                'value', 'currency']
+        df = pd.DataFrame(rows, columns=cols)
+        if not df.empty:
+            df['period_end'] = pd.to_datetime(df['period_end'])
+            df['value'] = df['value'].astype(float)
+        return df
+
+
+def _is_na(v) -> bool:
+    try:
+        return v is None or bool(pd.isna(v))
+    except (TypeError, ValueError):
+        return False
+
+
+def _same(a, b, tol: float = 1e-6) -> bool:
+    """比較兩個財報數值（DECIMAL 6 位四捨五入後）。"""
+    if a is None or b is None:
+        return a is None and b is None
+    return abs(a - b) <= max(tol, abs(a) * 1e-12)
+
+
+FIN_ITEM_COLUMNS = ('symbol', 'source', 'statement', 'field_id', 'name', 'period_end', 'fiscal_period',
+                    'freq', 'value', 'currency', 'run_id')
+UPSERT_FIN_ITEM = (
+    f'INSERT INTO financial_items ({", ".join(FIN_ITEM_COLUMNS)}) '
+    f'VALUES ({", ".join(["%s"] * len(FIN_ITEM_COLUMNS))}) AS new '
+    'ON DUPLICATE KEY UPDATE name=new.name, fiscal_period=new.fiscal_period, value=new.value, '
+    'currency=new.currency, run_id=new.run_id'
+)
+INSERT_REVISION = (
+    'INSERT INTO financial_revisions (symbol, source, statement, field_id, period_end, freq, old_value, '
+    'new_value, run_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'
+)
+FIN_METRIC_COLUMNS = (
+    'symbol', 'source', 'period_end', 'freq', 'fiscal_period', 'currency', 'filing_date', 'filing_form',
+    'available_date', 'available_basis', 'revenue', 'gross_profit', 'net_income', 'eps_basic', 'eps_diluted',
+    'ocf', 'capex', 'fcf', 'total_assets', 'current_assets', 'total_liabilities', 'current_liabilities',
+    'total_equity', 'revenue_ttm', 'gross_profit_ttm', 'net_income_ttm', 'ocf_ttm', 'capex_ttm', 'fcf_ttm',
+    'roe_ttm', 'roa_ttm', 'gross_margin_ttm', 'net_margin_ttm', 'fcf_margin_ttm', 'ocf_to_ni_ttm',
+    'debt_ratio', 'current_ratio', 'gross_margin_q', 'net_margin_q', 'run_id',
+)
+UPSERT_FIN_METRIC = (
+    f'INSERT INTO financial_metrics ({", ".join(FIN_METRIC_COLUMNS)}) '
+    f'VALUES ({", ".join(["%s"] * len(FIN_METRIC_COLUMNS))}) AS new ON DUPLICATE KEY UPDATE '
+    + ', '.join(f'{c}=new.{c}' for c in FIN_METRIC_COLUMNS
+                if c not in ('symbol', 'source', 'period_end', 'freq'))
+)

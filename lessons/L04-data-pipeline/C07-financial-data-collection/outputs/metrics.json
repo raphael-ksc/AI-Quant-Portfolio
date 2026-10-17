@@ -1,0 +1,885 @@
+{
+  "generated_on": "2026-10-17",
+  "versions": {
+    "moomoo-api": "10.11.7108",
+    "yfinance": "1.7.0",
+    "pandas": "3.0.6",
+    "pymysql": "1.2.3"
+  },
+  "params": {
+    "source": "moomoo",
+    "freq": "Q",
+    "periods_requested": 12,
+    "edgar": true,
+    "availability_rule": "SEC 10-Q/10-K 原始申報日隔天；查不到時季報 +46 天、財年 Q4 +76 天",
+    "ttm_rule": "連續 4 季都有值才計算"
+  },
+  "run": {
+    "run_id": 5,
+    "status": "success"
+  },
+  "symbols": {
+    "PLTR": {
+      "status": "success",
+      "periods": 12,
+      "items": 986,
+      "revisions": 0,
+      "first": "2023-09-30",
+      "last": "2026-06-30",
+      "edgar_matched": 12,
+      "edgar_error": null,
+      "field_report": {
+        "used": {
+          "revenue": {
+            "income/8001": 12
+          },
+          "gross_profit": {
+            "income/8004": 12
+          },
+          "net_income": {
+            "income/8043": 12
+          },
+          "eps_basic": {
+            "income/8047": 12
+          },
+          "eps_diluted": {
+            "income/8048": 12
+          },
+          "ocf": {
+            "cashflow/8015": 12
+          },
+          "capex": {
+            "cashflow/8046": 12
+          },
+          "fcf": {
+            "cashflow/8072": 12
+          },
+          "total_assets": {
+            "balance/8001": 12
+          },
+          "current_assets": {
+            "balance/8002": 12
+          },
+          "total_liabilities": {
+            "balance/8048": 12
+          },
+          "current_liabilities": {
+            "balance/8049": 12
+          },
+          "total_equity": {
+            "balance/8081": 12
+          }
+        },
+        "missing": {},
+        "aligned_period_ends": {}
+      },
+      "error": null
+    },
+    "IREN": {
+      "status": "success",
+      "periods": 13,
+      "items": 1124,
+      "revisions": 0,
+      "first": "2023-06-30",
+      "last": "2026-06-30",
+      "edgar_matched": 5,
+      "edgar_error": null,
+      "field_report": {
+        "used": {
+          "total_assets": {
+            "balance/8001": 12
+          },
+          "current_assets": {
+            "balance/8002": 12
+          },
+          "total_liabilities": {
+            "balance/8048": 12
+          },
+          "current_liabilities": {
+            "balance/8049": 12
+          },
+          "total_equity": {
+            "balance/8081": 12
+          },
+          "revenue": {
+            "income/8002": 4,
+            "income/8001": 8
+          },
+          "gross_profit": {
+            "income/8004": 12
+          },
+          "net_income": {
+            "income/8043": 12
+          },
+          "eps_basic": {
+            "income/8047": 12
+          },
+          "eps_diluted": {
+            "income/8048": 12
+          },
+          "capex": {
+            "cashflow/8046": 12
+          },
+          "fcf": {
+            "cashflow/8072": 12
+          },
+          "ocf": {
+            "cashflow/8015": 8
+          }
+        },
+        "missing": {
+          "revenue": [
+            "2023-06-30"
+          ],
+          "gross_profit": [
+            "2023-06-30"
+          ],
+          "net_income": [
+            "2023-06-30"
+          ],
+          "eps_basic": [
+            "2023-06-30"
+          ],
+          "eps_diluted": [
+            "2023-06-30"
+          ],
+          "ocf": [
+            "2023-06-30",
+            "2023-09-30",
+            "2023-12-31",
+            "2024-03-31",
+            "2024-06-30"
+          ],
+          "capex": [
+            "2023-06-30"
+          ],
+          "fcf": [
+            "2023-06-30"
+          ],
+          "total_assets": [
+            "2023-09-30"
+          ],
+          "current_assets": [
+            "2023-09-30"
+          ],
+          "total_liabilities": [
+            "2023-09-30"
+          ],
+          "current_liabilities": [
+            "2023-09-30"
+          ],
+          "total_equity": [
+            "2023-09-30"
+          ]
+        },
+        "aligned_period_ends": {}
+      },
+      "error": null
+    },
+    "NVDA": {
+      "status": "success",
+      "periods": 12,
+      "items": 1165,
+      "revisions": 0,
+      "first": "2023-10-29",
+      "last": "2026-07-26",
+      "edgar_matched": 12,
+      "edgar_error": null,
+      "field_report": {
+        "used": {
+          "revenue": {
+            "income/8001": 12
+          },
+          "gross_profit": {
+            "income/8004": 12
+          },
+          "net_income": {
+            "income/8043": 12
+          },
+          "eps_basic": {
+            "income/8047": 12
+          },
+          "eps_diluted": {
+            "income/8048": 12
+          },
+          "ocf": {
+            "cashflow/8015": 12
+          },
+          "capex": {
+            "cashflow/8046": 12
+          },
+          "fcf": {
+            "cashflow/8072": 12
+          },
+          "total_assets": {
+            "balance/8001": 12
+          },
+          "current_assets": {
+            "balance/8002": 12
+          },
+          "total_liabilities": {
+            "balance/8048": 12
+          },
+          "current_liabilities": {
+            "balance/8049": 12
+          },
+          "total_equity": {
+            "balance/8081": 12
+          }
+        },
+        "missing": {},
+        "aligned_period_ends": {
+          "2025/Q1": [
+            "2024-04-27",
+            "2024-04-28"
+          ]
+        }
+      },
+      "error": null
+    }
+  },
+  "latest": [
+    {
+      "symbol": "IREN",
+      "period_end": "2026-06-30",
+      "fiscal_period": "2026/Q4",
+      "available_date": "2026-08-28",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": -702622000.0,
+      "ocf_ttm": 2100418000.0,
+      "revenue_ttm": 707007000.0,
+      "roe_ttm": -0.16786597,
+      "gross_margin_ttm": 0.62323994,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.73492067,
+      "current_ratio": 3.55057224
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2026-06-30",
+      "fiscal_period": "2026/Q2",
+      "available_date": "2026-08-05",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 3016692000.0,
+      "ocf_ttm": 3400291000.0,
+      "revenue_ttm": 6155941000.0,
+      "roe_ttm": 0.30518234,
+      "gross_margin_ttm": 0.84796134,
+      "ocf_to_ni_ttm": 1.12715882,
+      "debt_ratio": 0.15358738,
+      "current_ratio": 7.2282125
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2026-07-26",
+      "fiscal_period": "2027/Q2",
+      "available_date": "2026-08-27",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 192879000000.0,
+      "ocf_ttm": 134360000000.0,
+      "revenue_ttm": 302969000000.0,
+      "roe_ttm": 0.84232523,
+      "gross_margin_ttm": 0.74674637,
+      "ocf_to_ni_ttm": 0.69660253,
+      "debt_ratio": 0.28503272,
+      "current_ratio": 4.58894907
+    }
+  ],
+  "series": [
+    {
+      "symbol": "IREN",
+      "period_end": "2023-06-30",
+      "fiscal_period": "2023/Q4",
+      "available_date": "2023-09-14",
+      "available_basis": "lag_rule",
+      "filing_form": null,
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.08044291,
+      "current_ratio": 3.71776176
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2023-09-30",
+      "fiscal_period": "2024/Q1",
+      "available_date": "2023-11-15",
+      "available_basis": "lag_rule",
+      "filing_form": null,
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": null,
+      "current_ratio": null
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2023-12-31",
+      "fiscal_period": "2024/Q2",
+      "available_date": "2024-02-15",
+      "available_basis": "lag_rule",
+      "filing_form": null,
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.08466394,
+      "current_ratio": 3.37587732
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2024-03-31",
+      "fiscal_period": "2024/Q3",
+      "available_date": "2024-05-16",
+      "available_basis": "lag_rule",
+      "filing_form": null,
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.06407243,
+      "current_ratio": 7.47453012
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2024-06-30",
+      "fiscal_period": "2024/Q4",
+      "available_date": "2024-09-14",
+      "available_basis": "lag_rule",
+      "filing_form": null,
+      "net_income_ttm": -28922000.0,
+      "ocf_ttm": null,
+      "revenue_ttm": 187192000.0,
+      "roe_ttm": -0.02635332,
+      "gross_margin_ttm": 0.44613552,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.04801101,
+      "current_ratio": 8.857789
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2024-09-30",
+      "fiscal_period": "2025/Q1",
+      "available_date": "2024-11-15",
+      "available_basis": "lag_rule",
+      "filing_form": null,
+      "net_income_ttm": -75324000.0,
+      "ocf_ttm": null,
+      "revenue_ttm": 205559000.0,
+      "roe_ttm": -0.06668508,
+      "gross_margin_ttm": 0.33633166,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.11837473,
+      "current_ratio": 1.08730545
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2024-12-31",
+      "fiscal_period": "2025/Q2",
+      "available_date": "2025-02-15",
+      "available_basis": "lag_rule",
+      "filing_form": null,
+      "net_income_ttm": -91984000.0,
+      "ocf_ttm": null,
+      "revenue_ttm": 279656000.0,
+      "roe_ttm": -0.07151215,
+      "gross_margin_ttm": 0.39466702,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.30549997,
+      "current_ratio": 0.93944674
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2025-03-31",
+      "fiscal_period": "2025/Q3",
+      "available_date": "2025-05-16",
+      "available_basis": "lag_rule",
+      "filing_form": null,
+      "net_income_ttm": -116766000.0,
+      "ocf_ttm": null,
+      "revenue_ttm": 370529000.0,
+      "roe_ttm": -0.08190846,
+      "gross_margin_ttm": 0.42822829,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.28354647,
+      "current_ratio": 0.46267901
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2025-06-30",
+      "fiscal_period": "2025/Q4",
+      "available_date": "2025-08-29",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": 86941000.0,
+      "ocf_ttm": 245886000.0,
+      "revenue_ttm": 501023000.0,
+      "roe_ttm": 0.0478358,
+      "gross_margin_ttm": 0.63548779,
+      "ocf_to_ni_ttm": 2.82819383,
+      "debt_ratio": 0.38187471,
+      "current_ratio": 4.29317629
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2025-09-30",
+      "fiscal_period": "2026/Q1",
+      "available_date": "2025-11-07",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 523255000.0,
+      "ocf_ttm": 392154000.0,
+      "revenue_ttm": 688554000.0,
+      "roe_ttm": 0.18192789,
+      "gross_margin_ttm": 0.6590754,
+      "ocf_to_ni_ttm": 0.74945103,
+      "debt_ratio": 0.32601009,
+      "current_ratio": 5.51640531
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2025-12-31",
+      "fiscal_period": "2026/Q2",
+      "available_date": "2026-02-06",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 389736000.0,
+      "ocf_ttm": 410249000.0,
+      "revenue_ttm": 757102000.0,
+      "roe_ttm": 0.15519954,
+      "gross_margin_ttm": 0.64091364,
+      "ocf_to_ni_ttm": 1.05263306,
+      "debt_ratio": 0.64266589,
+      "current_ratio": 4.96007512
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2026-03-31",
+      "fiscal_period": "2026/Q3",
+      "available_date": "2026-05-09",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 158053000.0,
+      "ocf_ttm": 392467000.0,
+      "revenue_ttm": 757074000.0,
+      "roe_ttm": 0.05931745,
+      "gross_margin_ttm": 0.6351955,
+      "ocf_to_ni_ttm": 2.4831354,
+      "debt_ratio": 0.63323252,
+      "current_ratio": 3.72221335
+    },
+    {
+      "symbol": "IREN",
+      "period_end": "2026-06-30",
+      "fiscal_period": "2026/Q4",
+      "available_date": "2026-08-28",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": -702622000.0,
+      "ocf_ttm": 2100418000.0,
+      "revenue_ttm": 707007000.0,
+      "roe_ttm": -0.16786597,
+      "gross_margin_ttm": 0.62323994,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.73492067,
+      "current_ratio": 3.55057224
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2023-10-29",
+      "fiscal_period": "2024/Q3",
+      "available_date": "2023-11-22",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.38566521,
+      "current_ratio": 3.58839688
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2024-01-28",
+      "fiscal_period": "2024/Q4",
+      "available_date": "2024-02-22",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.34612342,
+      "current_ratio": 4.17129151
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2024-04-27",
+      "fiscal_period": "2025/Q1",
+      "available_date": "2024-05-30",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.36238842,
+      "current_ratio": 3.529462
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2024-07-28",
+      "fiscal_period": "2025/Q2",
+      "available_date": "2024-08-29",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 53008000000.0,
+      "ocf_ttm": 48664000000.0,
+      "revenue_ttm": 96307000000.0,
+      "roe_ttm": 0.9114638,
+      "gross_margin_ttm": 0.75976824,
+      "ocf_to_ni_ttm": 0.91805011,
+      "debt_ratio": 0.31762235,
+      "current_ratio": 4.26895268
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2024-10-27",
+      "fiscal_period": "2025/Q3",
+      "available_date": "2024-11-21",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 63074000000.0,
+      "ocf_ttm": 58959000000.0,
+      "revenue_ttm": 113269000000.0,
+      "roe_ttm": 0.95713137,
+      "gross_margin_ttm": 0.75861003,
+      "ocf_to_ni_ttm": 0.93475917,
+      "debt_ratio": 0.31364503,
+      "current_ratio": 4.104618
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2025-01-26",
+      "fiscal_period": "2025/Q4",
+      "available_date": "2025-02-27",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": 72880000000.0,
+      "ocf_ttm": 64089000000.0,
+      "revenue_ttm": 130497000000.0,
+      "roe_ttm": 0.91872881,
+      "gross_margin_ttm": 0.74989463,
+      "ocf_to_ni_ttm": 0.87937706,
+      "debt_ratio": 0.28919096,
+      "current_ratio": 4.4398515
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2025-04-27",
+      "fiscal_period": "2026/Q1",
+      "available_date": "2025-05-29",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 76774000000.0,
+      "ocf_ttm": 76158000000.0,
+      "revenue_ttm": 148515000000.0,
+      "roe_ttm": 0.91568765,
+      "gross_margin_ttm": 0.7010807,
+      "ocf_to_ni_ttm": 0.99197645,
+      "debt_ratio": 0.33061619,
+      "current_ratio": 3.38840329
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2025-07-27",
+      "fiscal_period": "2026/Q2",
+      "available_date": "2025-08-28",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 86597000000.0,
+      "ocf_ttm": 77035000000.0,
+      "revenue_ttm": 165218000000.0,
+      "roe_ttm": 0.86483706,
+      "gross_margin_ttm": 0.69847111,
+      "ocf_to_ni_ttm": 0.88958047,
+      "debt_ratio": 0.28853915,
+      "current_ratio": 4.21400008
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2025-10-26",
+      "fiscal_period": "2026/Q3",
+      "available_date": "2025-11-20",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 99198000000.0,
+      "ocf_ttm": 83159000000.0,
+      "revenue_ttm": 187142000000.0,
+      "roe_ttm": 0.83431878,
+      "gross_margin_ttm": 0.70050015,
+      "ocf_to_ni_ttm": 0.83831327,
+      "debt_ratio": 0.26218755,
+      "current_ratio": 4.4675743
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2026-01-25",
+      "fiscal_period": "2026/Q4",
+      "available_date": "2026-02-26",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": 120067000000.0,
+      "ocf_ttm": 102718000000.0,
+      "revenue_ttm": 215938000000.0,
+      "roe_ttm": 0.7633334,
+      "gross_margin_ttm": 0.71068084,
+      "ocf_to_ni_ttm": 0.85550568,
+      "debt_ratio": 0.23940659,
+      "current_ratio": 3.90526381
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2026-04-26",
+      "fiscal_period": "2027/Q1",
+      "available_date": "2026-05-21",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 159613000000.0,
+      "ocf_ttm": 125648000000.0,
+      "revenue_ttm": 253491000000.0,
+      "roe_ttm": 0.81654338,
+      "gross_margin_ttm": 0.74145433,
+      "ocf_to_ni_ttm": 0.78720405,
+      "debt_ratio": 0.24665284,
+      "current_ratio": 3.44077568
+    },
+    {
+      "symbol": "NVDA",
+      "period_end": "2026-07-26",
+      "fiscal_period": "2027/Q2",
+      "available_date": "2026-08-27",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 192879000000.0,
+      "ocf_ttm": 134360000000.0,
+      "revenue_ttm": 302969000000.0,
+      "roe_ttm": 0.84232523,
+      "gross_margin_ttm": 0.74674637,
+      "ocf_to_ni_ttm": 0.69660253,
+      "debt_ratio": 0.28503272,
+      "current_ratio": 4.58894907
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2023-09-30",
+      "fiscal_period": "2023/Q3",
+      "available_date": "2023-11-04",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.21975396,
+      "current_ratio": 5.52947999
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2023-12-31",
+      "fiscal_period": "2023/Q4",
+      "available_date": "2024-02-21",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.21259833,
+      "current_ratio": 5.54761145
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2024-03-31",
+      "fiscal_period": "2024/Q1",
+      "available_date": "2024-05-08",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": null,
+      "ocf_ttm": null,
+      "revenue_ttm": null,
+      "roe_ttm": null,
+      "gross_margin_ttm": null,
+      "ocf_to_ni_ttm": null,
+      "debt_ratio": 0.19677376,
+      "current_ratio": 5.91039407
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2024-06-30",
+      "fiscal_period": "2024/Q2",
+      "available_date": "2024-08-07",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 404552000.0,
+      "ocf_ttm": 708381000.0,
+      "revenue_ttm": 2478981000.0,
+      "roe_ttm": 0.09776969,
+      "gross_margin_ttm": 0.81388361,
+      "ocf_to_ni_ttm": 1.75102583,
+      "debt_ratio": 0.20302357,
+      "current_ratio": 5.91572388
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2024-09-30",
+      "fiscal_period": "2024/Q3",
+      "available_date": "2024-11-06",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 476572000.0,
+      "ocf_ttm": 994710000.0,
+      "revenue_ttm": 2646338000.0,
+      "roe_ttm": 0.10379752,
+      "gross_margin_ttm": 0.81102338,
+      "ocf_to_ni_ttm": 2.08721872,
+      "debt_ratio": 0.20400749,
+      "current_ratio": 5.6727203
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2024-12-31",
+      "fiscal_period": "2024/Q4",
+      "available_date": "2025-02-19",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": 462190000.0,
+      "ocf_ttm": 1153865000.0,
+      "revenue_ttm": 2865507000.0,
+      "roe_ttm": 0.09072499,
+      "gross_margin_ttm": 0.80248172,
+      "ocf_to_ni_ttm": 2.49651658,
+      "debt_ratio": 0.1965778,
+      "current_ratio": 5.95801381
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2025-03-31",
+      "fiscal_period": "2025/Q1",
+      "available_date": "2025-05-07",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 570691000.0,
+      "ocf_ttm": 1334549000.0,
+      "revenue_ttm": 3115024000.0,
+      "roe_ttm": 0.10340529,
+      "gross_margin_ttm": 0.80009656,
+      "ocf_to_ni_ttm": 2.33847914,
+      "debt_ratio": 0.18078655,
+      "current_ratio": 6.49402497
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2025-06-30",
+      "fiscal_period": "2025/Q2",
+      "available_date": "2025-08-06",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 763292000.0,
+      "ocf_ttm": 1729613000.0,
+      "revenue_ttm": 3440587000.0,
+      "roe_ttm": 0.12667561,
+      "gross_margin_ttm": 0.80030268,
+      "ocf_to_ni_ttm": 2.26599126,
+      "debt_ratio": 0.18194146,
+      "current_ratio": 6.32354998
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2025-09-30",
+      "fiscal_period": "2025/Q3",
+      "available_date": "2025-11-05",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 1095366000.0,
+      "ocf_ttm": 1817505000.0,
+      "revenue_ttm": 3896163000.0,
+      "roe_ttm": 0.16377421,
+      "gross_margin_ttm": 0.80808195,
+      "ocf_to_ni_ttm": 1.65926731,
+      "debt_ratio": 0.17570841,
+      "current_ratio": 6.42675086
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2025-12-31",
+      "fiscal_period": "2025/Q4",
+      "available_date": "2026-02-18",
+      "available_basis": "edgar",
+      "filing_form": "10-K",
+      "net_income_ttm": 1625033000.0,
+      "ocf_ttm": 2134473000.0,
+      "revenue_ttm": 4475446000.0,
+      "roe_ttm": 0.21701798,
+      "gross_margin_ttm": 0.82366517,
+      "ocf_to_ni_ttm": 1.31349517,
+      "debt_ratio": 0.1586875,
+      "current_ratio": 7.10982399
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2026-03-31",
+      "fiscal_period": "2026/Q1",
+      "available_date": "2026-05-06",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 2281529000.0,
+      "ocf_ttm": 2723375000.0,
+      "revenue_ttm": 5224174000.0,
+      "roe_ttm": 0.26664961,
+      "gross_margin_ttm": 0.84073942,
+      "ocf_to_ni_ttm": 1.19366223,
+      "debt_ratio": 0.16108173,
+      "current_ratio": 6.90676518
+    },
+    {
+      "symbol": "PLTR",
+      "period_end": "2026-06-30",
+      "fiscal_period": "2026/Q2",
+      "available_date": "2026-08-05",
+      "available_basis": "edgar",
+      "filing_form": "10-Q",
+      "net_income_ttm": 3016692000.0,
+      "ocf_ttm": 3400291000.0,
+      "revenue_ttm": 6155941000.0,
+      "roe_ttm": 0.30518234,
+      "gross_margin_ttm": 0.84796134,
+      "ocf_to_ni_ttm": 1.12715882,
+      "debt_ratio": 0.15358738,
+      "current_ratio": 7.2282125
+    }
+  ]
+}
