@@ -58,4 +58,10 @@
 
 - Forward-adjusted prices change when future corporate actions occur; "as seen at the time" prices require unadjusted data (`adjust='none'`).
 - Moomoo's quota (100 symbols per 30 days) means a 50-stock cross-sectional study such as C24 needs quota planning, or yfinance for daily bars.
-- (To be completed: personal reflections)
+### Reflections
+
+1. **Time alignment is the first hurdle with financial statements.** Fiscal years differ between companies (IREN's ends in June), and Moomoo's `date_time_str` runs one day early. Aligning by fiscal-period label or the raw date field would misalign cross-company comparisons. Aligning everything by period-end date is the foundation for all later fundamental research.
+2. **Two data sources, two roles.**
+   - **Moomoo**: an official broker API with more stable connectivity and data, suited to serving as the data and order channel for live trading.
+   - **yfinance**: convenient for research and public reproduction, but it is an open-source package rather than an official Yahoo interface, so its stability is not guaranteed (the interface can change and data can go missing). It is suitable for research only.
+3. **A backtest is not live trading.** If the data source, price adjustment, announcement timing or fill price differs from live conditions, backtest results can be misleading. Recording these differences from the data layer onwards is what makes later backtest conclusions meaningful.

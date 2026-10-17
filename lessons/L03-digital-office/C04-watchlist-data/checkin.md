@@ -7,12 +7,12 @@ category: data-engineering
 knowledge: [data-engineering]
 tags: [Moomoo, yfinance, 日線, 分鐘線, 財務數據]
 symbols: [US.PLTR, US.IREN]
-status: wip
+status: done
 phase: 1
 order: 1
 flagship: false
-date:
-confidence:
+date: 2026-10-17
+confidence: 5
 source: 3-打造数字化办公室/3-基础设施打造（构建数字化办公室）.pdf p.81
 outputs:
   figures: [outputs/figures/daily_close.png, outputs/figures/minute_2026-02-06.png]
@@ -79,4 +79,10 @@ outputs:
 
 - 前復權價格會隨未來的公司行動改變；需要「當時看到的價格」時，要改抓不復權（`adjust='none'`）資料。
 - Moomoo 有額度限制（每 30 天 100 檔），C24 這類 50 檔的截面研究需要先規劃額度，或日線改用 yfinance。
-- （待你補充：自己的心得）
+### 我的心得
+
+1. **時間對齊是財報數據的第一關。** 各公司財年不同（IREN 的財年在 6 月結束），Moomoo 的 `date_time_str` 又會早一天；如果直接用財年編號或原始日期欄位，跨公司比較就會錯位。統一用「期末日」對齊，是之後所有基本面研究的地基。
+2. **兩個資料源，各有定位。**
+   - **Moomoo**：券商官方 API，連線與數據比較穩定，適合當實盤交易的資料與下單管道。
+   - **yfinance**：方便做研究和公開重現，但它是開源套件，不是 Yahoo 官方介面，穩定度沒有保證（介面可能改版、數據可能缺漏），只適合研究用途。
+3. **回測不等於實盤。** 數據源、復權方式、公告時點、成交價格，任何一個環節和實盤不一致，回測結果都可能失真。從數據層就要把這些差異記錄清楚，之後的回測結論才有意義。
